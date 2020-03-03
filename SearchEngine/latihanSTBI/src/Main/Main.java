@@ -22,15 +22,20 @@ public class Main {
     public static HashMap<String, ArrayList<Integer>> dateDict = LoadDict.loadTitle("XML/AfterDate.csv");
 
     public static void main(String[] args) {
+        search("kim || king && kingdom");
+    }
+    
+    public static ArrayList<String> search(String query) {
 
             //START
         ArrayList<String>test = new ArrayList<>();
         
-        test = getDocs("fly || pay");
+        test = getDocs(query);
         
         for (String string : test) {
             System.out.println(string);
         }
+        return test;
     }
     
     public static ArrayList<String> getDocs(String query){
@@ -85,11 +90,20 @@ public class Main {
             }
         }
         
+        //test leven title
+        System.out.println("LEVENSTHEIN TITLE");
+        for (String string : titleValidWordList) {
+            System.out.println(string);
+        }
+        System.out.println("==========================================\n\n\n\n");
+        //end test
+        
         for (String string : titleValidWordList) {
             if (titleDict.get(string) != null) {
                 myList.addAll(titleDict.get(string));
             }
         }
+        
         
         ArrayList<String> bodyValidWordList = new ArrayList<>();
         for (String string : bodyDict.keySet()) {
@@ -97,6 +111,14 @@ public class Main {
               bodyValidWordList.add(string);
           }
         }
+        
+        //test leven title
+        System.out.println("LEVENSTHEIN BODY");
+        for (String string : bodyValidWordList) {
+            System.out.println(string);
+        }
+        System.out.println("==========================================\n\n\n\n");
+        //end test
         
         for (String string : bodyValidWordList) {
             if (bodyDict.get(string) != null) {
@@ -137,12 +159,16 @@ public class Main {
                         if (stack.get(stack.size()-1) instanceof String){
                             String curSymbol = (String)stack.get(stack.size()-1);
                             if (curSymbol.equals(")")){
+                                isLoop = false;
                                 stack.remove(stack.size()-1);
                                 if (miniStack.size() == 1){
                                     stack.add(miniStack.get(0));
                                 }else{
                                     stack.add(eval(miniStack));
                                 }
+                            }else{
+                                miniStack.add(stack.get(stack.size()-1));
+                                stack.remove(stack.size()-1);
                             }
                         }else{
                             miniStack.add(stack.get(stack.size()-1));
@@ -169,12 +195,13 @@ public class Main {
                     stack.remove(i+1);
                     stack.remove(i);
                     stack.set(i-1, result);
+                    i=0;
                 }
             }
             i++;
         }
         
-        
+        i=0;
         while (i < stack.size()){
             if (stack.get(i) instanceof String){
                 String symbol = (String) stack.get(i);
@@ -183,6 +210,7 @@ public class Main {
                     stack.remove(i+1);
                     stack.remove(i);
                     stack.set(i-1, result);
+                    i=0;
                 }
             }
             i++;
