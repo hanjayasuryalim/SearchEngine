@@ -1,7 +1,10 @@
 
-SearchEngine/latihanSTBI/lib/
+/SearchEngine/latihanSTBI/lib/
 /SearchEngine/latihanSTBI/nbproject/private/
 /SearchEngine/latihanSTBI/dist/
-SearchEngine/latihanSTBI/build/
+/SearchEngine/latihanSTBI/build/
 
-SearchEngine/GUI Search Engine/nbproject/private/
+/SearchEngine/GUI Search Engine/lib/
+/SearchEngine/GUI Search Engine/nbproject/private/
+/SearchEngine/GUI Search Engine/dist/
+/SearchEngine/GUI Search Engine/build/
