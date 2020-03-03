@@ -22,52 +22,15 @@ public class Main {
     public static HashMap<String, ArrayList<Integer>> dateDict = LoadDict.loadTitle("XML/AfterDate.csv");
 
     public static void main(String[] args) {
-//        titleDict = LoadDict.loadTitle("XML/AfterTitle.csv");
-//        bodyDict = LoadDict.loadTitle("XML/AfterBody.csv");
-//        dateDict = LoadDict.loadTitle("XML/AfterDate.csv");
-//     
-//        Scanner scan = new Scanner(System.in);
-//        System.out.print("Masukkan Query : ");
-//        String query = scan.nextLine();
-//
-//        String[] queryPart = query.split(" ");
-//        ArrayList<Object> queries = new ArrayList<>();
-//        for (int i = 0; i < queryPart.length; i++) {
-//            if (queryPart[i].equals("&&") || queryPart[i].equals("||") || queryPart[i].equals("(") || queryPart[i].equals(")") ){
-//                queries.add(queryPart[i]);            
-//            }else{
-//                queries.add(getList(queryPart[i]));
-//            }
-//            
-//
-//        }
-//
-//        ArrayList<Integer> result = ((ArrayList)eval(queries));
-//        ArrayList<String> listDocument = new ArrayList<>();
-//        Collections.sort(result);
-//        for (int i = 0; i < result.size(); i++) {
-//            if (result.get(i) instanceof Integer){
-//                listDocument.add(((Integer)result.get(i)).toString());
-////                System.out.println(((Integer)result.get(i)).toString());
-//            }
-//            
-//        }
-//        
-//        for (String string : listDocument) {
-//            System.out.println(string);
-//        }
-//        
 
             //START
-//        ArrayList<String>test = new ArrayList<>();
-//        
-//        test = getDocs("zip || zone");
-//        
-//        for (String string : test) {
-//            System.out.println(string);
-//        }
-//        int a=Levensthein.getLevenshteinDistance("zipys", "zap");
-//        System.out.println(a);
+        ArrayList<String>test = new ArrayList<>();
+        
+        test = getDocs("fly || pay");
+        
+        for (String string : test) {
+            System.out.println(string);
+        }
     }
     
     public static ArrayList<String> getDocs(String query){
@@ -93,7 +56,7 @@ public class Main {
         for (int i = 0; i < result.size(); i++) {
             if (result.get(i) instanceof Integer){
                 listDocument.add(((Integer)result.get(i)).toString());
-//                System.out.println(((Integer)result.get(i)).toString());
+                
             }
             
         }
@@ -112,22 +75,43 @@ public class Main {
                 myList.add((Integer)i);
             }
         }
-
-//        if (titleDict.get(word) != null) {
-//            myList.addAll(titleDict.get(word));
-//        }
-//
-//        if (bodyDict.get(word) != null) {
-//            myList = orOperation(myList,bodyDict.get(word));
-//        }
-//
+          
+        //levensthein
+        int threshold = 1;
+        ArrayList<String> titleValidWordList = new ArrayList<>();
+        for (String string : titleDict.keySet()) {
+            if (Levensthein.getLevenshteinDistance(word, string)<=threshold){
+                titleValidWordList.add(string);
+            }
+        }
+        
+        for (String string : titleValidWordList) {
+            if (titleDict.get(string) != null) {
+                myList.addAll(titleDict.get(string));
+            }
+        }
+        
+        ArrayList<String> bodyValidWordList = new ArrayList<>();
+        for (String string : bodyDict.keySet()) {
+          if(Levensthein.getLevenshteinDistance(word, string)<=threshold){
+              bodyValidWordList.add(string);
+          }
+        }
+        
+        for (String string : bodyValidWordList) {
+            if (bodyDict.get(string) != null) {
+                myList = orOperation(myList,bodyDict.get(word));
+            }
+        }
+        
+  
 //        if (titleDict.get(word) != null) {
 //            myList = orOperation(myList,titleDict.get(word));
 //        }
 //
-//        if (myList.size() == 0) {
-//            System.out.println("nothing");
-//        }
+        if (myList.size() == 0) {
+            System.out.println("nothing");
+        }
         return myList;
     }
 
@@ -211,7 +195,7 @@ public class Main {
     }
 
     private static ArrayList<Integer> orOperation(Object get, Object get0) {
-//        System.out.println("masuk or");
+
         if ((get instanceof ArrayList) && (get0 instanceof ArrayList)){
             ArrayList<Integer> listNumber1 = (ArrayList)get;
             ArrayList<Integer> listNumber2 = (ArrayList)get0;
@@ -241,7 +225,7 @@ public class Main {
     }
 
     private static ArrayList<Integer> andOperation(Object get, Object getTwo) {
-//        System.out.println("Masuk and");
+
         if ((get instanceof ArrayList) && (getTwo instanceof ArrayList)){
             ArrayList<Integer> listNumber1 = (ArrayList)get;
             ArrayList<Integer> listNumber2 = (ArrayList)getTwo;
