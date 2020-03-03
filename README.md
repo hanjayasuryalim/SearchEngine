@@ -5,3 +5,4 @@
 * stanford-corenlp-3.9.2-javadoc.jar
 * stanford-corenlp-3.9.2-models.jar
 * stanford-corenlp-3.9.2-sources.jar
+Library disimpan di folder `lib` project.
