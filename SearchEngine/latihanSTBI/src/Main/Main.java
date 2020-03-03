@@ -90,11 +90,20 @@ public class Main {
             }
         }
         
+        //test leven title
+        System.out.println("LEVENSTHEIN TITLE");
+        for (String string : titleValidWordList) {
+            System.out.println(string);
+        }
+        System.out.println("==========================================\n\n\n\n");
+        //end test
+        
         for (String string : titleValidWordList) {
             if (titleDict.get(string) != null) {
                 myList.addAll(titleDict.get(string));
             }
         }
+        
         
         ArrayList<String> bodyValidWordList = new ArrayList<>();
         for (String string : bodyDict.keySet()) {
@@ -102,6 +111,14 @@ public class Main {
               bodyValidWordList.add(string);
           }
         }
+        
+        //test leven title
+        System.out.println("LEVENSTHEIN BODY");
+        for (String string : bodyValidWordList) {
+            System.out.println(string);
+        }
+        System.out.println("==========================================\n\n\n\n");
+        //end test
         
         for (String string : bodyValidWordList) {
             if (bodyDict.get(string) != null) {
