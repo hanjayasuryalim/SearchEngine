@@ -8,3 +8,5 @@
 /SearchEngine/GUI Search Engine/nbproject/private
 /SearchEngine/GUI Search Engine/dist
 /SearchEngine/GUI Search Engine/build
+
+*.class
