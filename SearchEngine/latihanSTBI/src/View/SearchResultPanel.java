@@ -36,6 +36,7 @@ public class SearchResultPanel extends javax.swing.JPanel {
         testPageButton1 = new javax.swing.JButton();
         testPageButton2 = new javax.swing.JButton();
         testPageButton3 = new javax.swing.JButton();
+        responseLabel = new javax.swing.JLabel();
 
         jButton1.setText("Search");
 
@@ -73,13 +74,13 @@ public class SearchResultPanel extends javax.swing.JPanel {
         paginationPanelLayout.setHorizontalGroup(
             paginationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(paginationPanelLayout.createSequentialGroup()
-                .addGap(245, 245, 245)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(testPageButton1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(testPageButton2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(testPageButton3)
-                .addContainerGap(257, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         paginationPanelLayout.setVerticalGroup(
             paginationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -88,6 +89,8 @@ public class SearchResultPanel extends javax.swing.JPanel {
                 .addComponent(testPageButton2)
                 .addComponent(testPageButton3))
         );
+
+        responseLabel.setText("Showing 420 results (0.5 seconds)");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -99,7 +102,10 @@ public class SearchResultPanel extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(paginationPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 628, Short.MAX_VALUE)
                     .addComponent(searchBarPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(searchBarSeparator))
+                    .addComponent(searchBarSeparator)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(responseLabel)
+                        .addGap(0, 387, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -110,7 +116,9 @@ public class SearchResultPanel extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(searchBarSeparator, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(searchResultPane, javax.swing.GroupLayout.DEFAULT_SIZE, 366, Short.MAX_VALUE)
+                .addComponent(responseLabel)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(searchResultPane, javax.swing.GroupLayout.DEFAULT_SIZE, 345, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(paginationPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -122,6 +130,7 @@ public class SearchResultPanel extends javax.swing.JPanel {
     private javax.swing.JButton jButton1;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JPanel paginationPanel;
+    private javax.swing.JLabel responseLabel;
     private javax.swing.JPanel searchBarPanel;
     private javax.swing.JSeparator searchBarSeparator;
     private javax.swing.JScrollPane searchResultPane;
