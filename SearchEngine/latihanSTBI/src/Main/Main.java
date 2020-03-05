@@ -14,6 +14,7 @@ import java.util.Scanner;
 import java.util.Set;
 import preprocessing.Levensthein;
 import preprocessing.PreProcess;
+import preprocessing.Soundex;
 
 public class Main {
 
@@ -23,6 +24,7 @@ public class Main {
 
     public static void main(String[] args) {
         search("kim || king && kingdom");
+         
     }
     
     public static ArrayList<String> search(String query) {
@@ -81,11 +83,16 @@ public class Main {
             }
         }
           
-        //levensthein
+        //levensthein and Soundex
+        Soundex.initiate();
         int threshold = 1;
         ArrayList<String> titleValidWordList = new ArrayList<>();
         for (String string : titleDict.keySet()) {
             if (Levensthein.getLevenshteinDistance(word, string)<=threshold){
+                titleValidWordList.add(string);
+            }
+            
+            if(Soundex.execute(word, string)){
                 titleValidWordList.add(string);
             }
         }
@@ -110,6 +117,10 @@ public class Main {
           if(Levensthein.getLevenshteinDistance(word, string)<=threshold){
               bodyValidWordList.add(string);
           }
+          
+          if(Soundex.execute(word, string)){
+              bodyValidWordList.add(string);
+          }
         }
         
         //test leven title
@@ -126,11 +137,6 @@ public class Main {
             }
         }
         
-  
-//        if (titleDict.get(word) != null) {
-//            myList = orOperation(myList,titleDict.get(word));
-//        }
-//
         if (myList.size() == 0) {
             System.out.println("nothing");
         }
