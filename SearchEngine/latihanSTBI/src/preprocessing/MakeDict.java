@@ -21,79 +21,80 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class MakeDict {
-    
+
     private static void printAllDictionary(HashMap<String, ArrayList<Integer>> dict) {
         Set<String> keys = dict.keySet();
- 
+
 
         List<String> keySort =  StringSorter.sortStringList(new ArrayList<String>(keys));
-        
+
         for (int i = 0; i < keySort.size(); i++) {
             String key = keySort.get(i);
             System.out.print(key + " : ");
-            
+
             ArrayList<Integer> values = dict.get(key);
             values.forEach((value) -> System.out.print(value + " "));
-            
+
             System.out.println(" ");
-            
+
         }
     }
-    
+
     private static String csvDict(HashMap<String, ArrayList<Integer>> dict,String category,String target) {
         String data = "";
         Set<String> keySort = dict.keySet();
-        
+
         List<String> keys =  StringSorter.sortStringList(new ArrayList<String>(keySort));
-        WriteFile.writeData(data, target);
         data = "";
-        
+
         for (int j = 0; j < keys.size();j++) {
             String key = keys.get(j);
-            data += key + ":";
-            
-            ArrayList<Integer> values = dict.get(key);
-            for (int i = 0; i < values.size(); i++) {
-                data += String.valueOf(values.get(i)) + ",";
-            }
-                        
-            System.out.println(data);
-            
-            data +="\n";
+            if (!key.equals("")){
+              data += key + "\t";
 
-            WriteFile.writeData(data, target);
-            data = "";
-            System.out.println(" ");
+              ArrayList<Integer> values = dict.get(key);
+              for (int i = 0; i < values.size(); i++) {
+                  data += String.valueOf(values.get(i)) + "\t";
+              }
+
+              System.out.println(data);
+
+              data +="\n";
+
+              WriteFile.writeData(data, target);
+              data = "";
+              System.out.println(" ");
+            }
         }
         data += "\n\n";
-        
+
         WriteFile.writeData(data, target);
         data = "";
-        
+
         return data;
     }
-    
+
     public static void main(String[] args) throws ParserConfigurationException, SAXException {
         HashMap<String, ArrayList<Integer>> dictDate = new HashMap<>();
         HashMap<String, ArrayList<Integer>> dictTitle = new HashMap<>();
         HashMap<String, ArrayList<Integer>> dictBody = new HashMap<>();
-        
+
         int n = 500;
-        
+
         for (int i = 1; i <= n; i++) {
             String from = "XML/Doc (" + i + ").xml";
-            
+
             //String text = ReadFile.inputBasicFile(from);
             //InputSource is = new InputSource();
             //is.setCharacterStream(new StringReader(text));
-            File f = new File(from);        
-                    
+            File f = new File(from);
+
             try {
                 DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
                 DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
                 //Document doc = dBuilder.parse(is);
                 Document doc = dBuilder.parse(f);
-                
+
                 String date = (doc.getElementsByTagName("date").getLength() <= 0) ? "" : doc.getElementsByTagName("date").item(0).getTextContent();
                 System.out.println(date);
                 while(date.contains("  ")){
@@ -109,13 +110,13 @@ public class MakeDict {
                     } else if (!" ".equals(key)) {
                         ArrayList<Integer> value = new ArrayList<>();
                         value.add(i);
-                        
+
                         dictDate.put(key, value);
                     }
                 }
-                
+
                 String title = (doc.getElementsByTagName("title").getLength() <= 0) ? "" : doc.getElementsByTagName("title").item(0).getTextContent();
-                
+
                 while(title.contains("  ")){
                     title = title.replace("  ", " ");
                 }
@@ -128,13 +129,13 @@ public class MakeDict {
                     } else if (!" ".equals(key)) {
                         ArrayList<Integer> value = new ArrayList<>();
                         value.add(i);
-                        
+
                         dictTitle.put(key, value);
                     }
                 }
-                
+
                 String body = (doc.getElementsByTagName("body").getLength() <= 0) ? "" : doc.getElementsByTagName("body").item(0).getTextContent();
-                
+
                 while(body.contains("  ")){
                     body = body.replace("  ", " ");
                 }
@@ -147,7 +148,7 @@ public class MakeDict {
                     } else if (!" ".equals(key)) {
                         ArrayList<Integer> value = new ArrayList<>();
                         value.add(i);
-                        
+
                         dictBody.put(key, value);
                     }
                 }
@@ -157,15 +158,15 @@ public class MakeDict {
         }
             String data ="";
             System.out.println("Dictionary of Date : ");
-            csvDict(dictDate, "Date","XML/AfterDate.csv");
-            
-            
+            csvDict(dictDate, "Date","XML/AfterDate.tsv");
+
+
             System.out.println("Dictionary of Title : ");
-            csvDict(dictTitle, "Title","XML/AfterTitle.csv");
-            
+            csvDict(dictTitle, "Title","XML/AfterTitle.tsv");
+
             System.out.println("Dictionary of Body : ");
-            csvDict(dictBody, "Body","XML/AfterBody.csv");
-            
-            
+            csvDict(dictBody, "Body","XML/AfterBody.tsv");
+
+
     }
 }
