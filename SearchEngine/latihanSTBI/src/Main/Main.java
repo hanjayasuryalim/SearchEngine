@@ -18,12 +18,12 @@ import preprocessing.Soundex;
 
 public class Main {
 
-    public static HashMap<String, ArrayList<Integer>> titleDict = LoadDict.loadTitle("XML/AfterTitle.csv");
-    public static HashMap<String, ArrayList<Integer>> bodyDict = LoadDict.loadTitle("XML/AfterBody.csv");
-    public static HashMap<String, ArrayList<Integer>> dateDict = LoadDict.loadTitle("XML/AfterDate.csv");
+    public static HashMap<String, ArrayList<Integer>> titleDict = LoadDict.loadTitle("XML/AfterTitle.tsv");
+    public static HashMap<String, ArrayList<Integer>> bodyDict = LoadDict.loadTitle("XML/AfterBody.tsv");
+    public static HashMap<String, ArrayList<Integer>> dateDict = LoadDict.loadTitle("XML/AfterDate.tsv");
 
     public static void main(String[] args) {
-        search("kim || king && kingdom");
+        search("distance");
          
     }
     
@@ -41,9 +41,9 @@ public class Main {
     }
     
     public static ArrayList<String> getDocs(String query){
-        titleDict = LoadDict.loadTitle("XML/AfterTitle.csv");
-        bodyDict = LoadDict.loadTitle("XML/AfterBody.csv");
-        dateDict = LoadDict.loadTitle("XML/AfterDate.csv");
+        titleDict = LoadDict.loadTitle("XML/AfterTitle.tsv");
+        bodyDict = LoadDict.loadTitle("XML/AfterBody.tsv");
+        dateDict = LoadDict.loadTitle("XML/AfterDate.tsv");
         
          String[] queryPart = query.split(" ");
         ArrayList<Object> queries = new ArrayList<>();

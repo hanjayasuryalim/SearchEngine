@@ -45,25 +45,29 @@ public class MakeDict {
         Set<String> keySort = dict.keySet();
         
         List<String> keys =  StringSorter.sortStringList(new ArrayList<String>(keySort));
-        WriteFile.writeData(data, target);
+        
         data = "";
         
         for (int j = 0; j < keys.size();j++) {
             String key = keys.get(j);
-            data += key + ":";
-            
-            ArrayList<Integer> values = dict.get(key);
-            for (int i = 0; i < values.size(); i++) {
-                data += String.valueOf(values.get(i)) + ",";
-            }
-                        
-            System.out.println(data);
-            
-            data +="\n";
+            if (!key.equals("")) {
+                
 
-            WriteFile.writeData(data, target);
-            data = "";
-            System.out.println(" ");
+                data += key + "\t";
+
+                ArrayList<Integer> values = dict.get(key);
+                for (int i = 0; i < values.size(); i++) {
+                    data += String.valueOf(values.get(i)) + "\t";
+                }
+
+                System.out.println(data);
+
+                data +="\n";
+
+                WriteFile.writeData(data, target);
+                data = "";
+                System.out.println(" ");
+            }
         }
         data += "\n\n";
         
@@ -157,14 +161,14 @@ public class MakeDict {
         }
             String data ="";
             System.out.println("Dictionary of Date : ");
-            csvDict(dictDate, "Date","XML/AfterDate.csv");
+            csvDict(dictDate, "Date","XML/AfterDate.tsv");
             
             
             System.out.println("Dictionary of Title : ");
-            csvDict(dictTitle, "Title","XML/AfterTitle.csv");
+            csvDict(dictTitle, "Title","XML/AfterTitle.tsv");
             
             System.out.println("Dictionary of Body : ");
-            csvDict(dictBody, "Body","XML/AfterBody.csv");
+            csvDict(dictBody, "Body","XML/AfterBody.tsv");
             
             
     }
