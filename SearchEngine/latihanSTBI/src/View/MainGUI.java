@@ -5,6 +5,8 @@
  */
 package View;
 
+import javax.swing.JPanel;
+
 /**
  *
  * @author Specter2k11
@@ -41,6 +43,7 @@ public class MainGUI extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     /**
@@ -73,7 +76,10 @@ public class MainGUI extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new MainGUI().setVisible(true);
+                MainGUI mainGUI = new MainGUI();
+                mainGUI.setVisible(true);
+                JPanel mainPage = new MainPagePanel();
+                mainGUI.setContentPane(mainPage);
             }
         });
     }
