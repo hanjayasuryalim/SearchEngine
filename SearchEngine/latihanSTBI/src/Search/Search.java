@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Main;
+package Search;
 
 import Utility.LoadDict;
 import java.util.ArrayList;
@@ -16,14 +16,14 @@ import preprocessing.Levensthein;
 import preprocessing.PreProcess;
 import preprocessing.Soundex;
 
-public class Main {
+public class Search {
 
     public static HashMap<String, ArrayList<Integer>> titleDict = LoadDict.loadTitle("XML/AfterTitle.tsv");
     public static HashMap<String, ArrayList<Integer>> bodyDict = LoadDict.loadTitle("XML/AfterBody.tsv");
     public static HashMap<String, ArrayList<Integer>> dateDict = LoadDict.loadTitle("XML/AfterDate.tsv");
 
     public static void main(String[] args) {
-        search("distance");
+        search("~ minimum");
          
     }
     
@@ -48,7 +48,7 @@ public class Main {
          String[] queryPart = query.split(" ");
         ArrayList<Object> queries = new ArrayList<>();
         for (int i = 0; i < queryPart.length; i++) {
-            if (queryPart[i].equals("&&") || queryPart[i].equals("||") || queryPart[i].equals("(") || queryPart[i].equals(")") ){
+            if (queryPart[i].equals("&&") || queryPart[i].equals("||") || queryPart[i].equals("(") || queryPart[i].equals(")") || queryPart[i].equals("~") ){
                 queries.add(queryPart[i]);            
             }else{
                 queries.add(getList(queryPart[i]));
@@ -189,7 +189,21 @@ public class Main {
             }           
             i++;
         }
-   
+        i = 0;
+        
+        while (i < stack.size()){
+            if (stack.get(i) instanceof String){
+                String symbol = (String) stack.get(i);
+                if (symbol.equals("~")){  
+                    stack.remove(i);
+                    System.out.println("abcde");
+                    ArrayList<Integer> result = notOperation(stack.get(i-1)); 
+                    stack.set(i-1,  result);
+                    i=0;
+                }
+            }
+            i++;
+        }
         
         i = 0;
         
@@ -277,6 +291,22 @@ public class Main {
                 }
             }
             return listNumberFinal;
+        } 
+        return null;
+    }
+    private static ArrayList<Integer> notOperation(Object get) {
+        ArrayList<Integer> dummyData = new ArrayList<>();
+        
+        if (get instanceof ArrayList) {
+            ArrayList<Integer> listNumber1 = (ArrayList)get;
+            for (int i = 1; i <= 500; i++) {
+                if (listNumber1.size()>0 && listNumber1.get(0).equals(Integer.valueOf(i))){
+                    listNumber1.remove(0);
+                }else{
+                    dummyData.add(i);
+                }
+            }
+            return dummyData;
         } 
         return null;
     }
