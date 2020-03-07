@@ -42,6 +42,7 @@ public class ReadFile {
             String text = "<?xml version=\"1.0\"?><root>";
             String line;
             while ((line = br.readLine()) != null) {
+                line = line.replace("&lt;"," ");
                 text += line + " ";
 
             }

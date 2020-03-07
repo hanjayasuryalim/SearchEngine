@@ -10,7 +10,7 @@ import java.io.File;
 public class CreateDirectory {
     public static void createDir(String path){
         try {
-            File f = new File("XML");
+            File f = new File(path);
             if(f.mkdir()){
                 
             }

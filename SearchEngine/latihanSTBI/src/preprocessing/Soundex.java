@@ -70,7 +70,15 @@ public class Soundex {
         
         String temp = s.toUpperCase();
         String term ="";
-        term+=temp.charAt(0);
+        
+        if(temp.length()==1){
+            term = temp;
+        }else{
+            term+=temp.charAt(0);
+        }
+        
+        
+        
         String returnTerm = "";
        
         for (int i = 1; i < temp.length(); i++) {

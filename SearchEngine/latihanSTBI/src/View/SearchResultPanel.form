@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
-<Form version="1.3" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JPanelFormInfo">
+<Form version="1.5" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JPanelFormInfo">
   <NonVisualComponents>
     <Component class="javax.swing.ButtonGroup" name="modeButtonGroup">
     </Component>
@@ -23,7 +23,6 @@
           <Group type="102" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="paginationPanel" pref="628" max="32767" attributes="0"/>
                   <Component id="searchBarPanel" alignment="0" max="32767" attributes="0"/>
                   <Component id="modeSelectPanel" alignment="0" max="32767" attributes="0"/>
                   <Component id="searchBarSeparator" alignment="0" max="32767" attributes="0"/>
@@ -49,9 +48,7 @@
               <EmptySpace max="-2" attributes="0"/>
               <Component id="responseLabel" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="searchResultPane" pref="311" max="32767" attributes="0"/>
-              <EmptySpace max="-2" attributes="0"/>
-              <Component id="paginationPanel" min="-2" pref="31" max="-2" attributes="0"/>
+              <Component id="searchResultPane" pref="348" max="32767" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
@@ -90,6 +87,9 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="Search"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="searchButtonActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JTextField" name="searchTextField">
         </Component>
@@ -98,57 +98,14 @@
     <Component class="javax.swing.JSeparator" name="searchBarSeparator">
     </Component>
     <Container class="javax.swing.JScrollPane" name="searchResultPane">
-
-      <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
-    </Container>
-    <Container class="javax.swing.JPanel" name="paginationPanel">
       <Properties>
-        <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-          <Dimension value="[0, 32]"/>
+        <Property name="horizontalScrollBarPolicy" type="int" value="31"/>
+        <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
+          <Color id="Default Cursor"/>
         </Property>
       </Properties>
 
-      <Layout>
-        <DimensionLayout dim="0">
-          <Group type="103" groupAlignment="0" attributes="0">
-              <Group type="102" alignment="0" attributes="0">
-                  <EmptySpace pref="251" max="32767" attributes="0"/>
-                  <Component id="testPageButton1" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace max="-2" attributes="0"/>
-                  <Component id="testPageButton2" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace max="-2" attributes="0"/>
-                  <Component id="testPageButton3" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace pref="251" max="32767" attributes="0"/>
-              </Group>
-          </Group>
-        </DimensionLayout>
-        <DimensionLayout dim="1">
-          <Group type="103" groupAlignment="0" attributes="0">
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="testPageButton1" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="testPageButton2" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="testPageButton3" alignment="3" min="-2" max="-2" attributes="0"/>
-              </Group>
-          </Group>
-        </DimensionLayout>
-      </Layout>
-      <SubComponents>
-        <Component class="javax.swing.JButton" name="testPageButton1">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="1"/>
-          </Properties>
-        </Component>
-        <Component class="javax.swing.JButton" name="testPageButton2">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="2"/>
-          </Properties>
-        </Component>
-        <Component class="javax.swing.JButton" name="testPageButton3">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="3"/>
-          </Properties>
-        </Component>
-      </SubComponents>
+      <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
     </Container>
     <Component class="javax.swing.JLabel" name="responseLabel">
       <Properties>
@@ -169,7 +126,7 @@
                   <Component id="andModeButton" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="advModeButton" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace max="32767" attributes="0"/>
+                  <EmptySpace pref="253" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -192,6 +149,9 @@
             </Property>
             <Property name="text" type="java.lang.String" value="OR"/>
           </Properties>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_AddingCodePre" type="java.lang.String" value="orModeButton.setActionCommand(&quot;0&quot;);"/>
+          </AuxValues>
         </Component>
         <Component class="javax.swing.JLabel" name="searchModeLabel">
           <Properties>
@@ -205,6 +165,9 @@
             </Property>
             <Property name="text" type="java.lang.String" value="AND"/>
           </Properties>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_AddingCodePre" type="java.lang.String" value="andModeButton.setActionCommand(&quot;1&quot;);"/>
+          </AuxValues>
         </Component>
         <Component class="javax.swing.JRadioButton" name="advModeButton">
           <Properties>
@@ -213,6 +176,9 @@
             </Property>
             <Property name="text" type="java.lang.String" value="Advanced Query"/>
           </Properties>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_AddingCodePre" type="java.lang.String" value="advModeButton.setActionCommand(&quot;2&quot;);"/>
+          </AuxValues>
         </Component>
       </SubComponents>
     </Container>

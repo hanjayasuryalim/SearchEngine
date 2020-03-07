@@ -21,4 +21,14 @@ public class WriteFile {
             e.printStackTrace();
         }
     }
+    
+    public static void writeDatasetXML(String data,String path){
+        try{
+            FileWriter writer = new FileWriter(path,true);
+            writer.write(data);
+            writer.close();
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+    }
 }
