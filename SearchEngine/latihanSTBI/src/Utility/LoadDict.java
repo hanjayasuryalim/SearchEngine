@@ -18,11 +18,11 @@ public class LoadDict {
         ArrayList<String> rows = ReadFile.inputFile(path);
         for (int i = 0; i < rows.size(); i++) {
             String row = rows.get(i);
-            String token = row.split(":")[0];
+            String token = row.split("\t")[0];
             if (token.equals("") == false){
-                String [] index = row.split(":")[1].split(",");
+                String [] index = row.split("\t");
                 ArrayList<Integer> idDokumen = new ArrayList<>();
-                for (int j = 0; j < index.length; j++) {
+                for (int j = 1; j < index.length; j++) {
                     String intString = index[j];
                     idDokumen.add(Integer.valueOf(intString));
                 }
