@@ -7,6 +7,8 @@ package View;
 import Search.*;
 import java.awt.Container;
 import java.awt.GridLayout;
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.util.ArrayList;
 import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
@@ -41,13 +43,18 @@ public class SearchResultPanel extends javax.swing.JPanel {
                 break;
             }
         }
-        ArrayList<String> searchResult = Search.search(searchQuery,mode);
+        Search s = new Search();
+        ArrayList<String> searchResult = s.search(searchQuery,mode);
+        int resultCount = searchResult.size();
         Container resultContainer = new Container();
         resultContainer.setLayout(new GridLayout(0,1));
         for(String docNumber : searchResult) {
             ResultLinePanel searchResultPanel = new ResultLinePanel(Integer.parseInt(docNumber),searchQuery,mode);
             resultContainer.add(searchResultPanel);
         }
+        long timeElapsed = s.getTimeElapsed();
+        NumberFormat f = new DecimalFormat("#0.00");
+        responseLabel.setText("Showing " + resultCount + " results (" + f.format(timeElapsed/(double)1000000000) + " seconds)");
         javax.swing.SwingUtilities.invokeLater(new Runnable() {
             public void run() { 
                 searchResultPane.getVerticalScrollBar().setValue(0);
@@ -109,7 +116,7 @@ public class SearchResultPanel extends javax.swing.JPanel {
         searchResultPane.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
         searchResultPane.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
-        responseLabel.setText("Showing 420 results (0.5 seconds)");
+        responseLabel.setText("Result and Response Time");
 
         modeButtonGroup.add(orModeButton);
         orModeButton.setText("OR");
