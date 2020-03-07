@@ -4,6 +4,12 @@
  * and open the template in the editor.
  */
 package View;
+import Search.*;
+import java.awt.Container;
+import java.awt.GridLayout;
+import java.util.ArrayList;
+import javax.swing.JFrame;
+import javax.swing.SwingUtilities;
 
 /**
  *
@@ -35,6 +41,19 @@ public class SearchResultPanel extends javax.swing.JPanel {
                 break;
             }
         }
+        ArrayList<String> searchResult = Search.search(searchQuery,mode);
+        Container resultContainer = new Container();
+        resultContainer.setLayout(new GridLayout(0,1));
+        for(String docNumber : searchResult) {
+            ResultLinePanel searchResultPanel = new ResultLinePanel(Integer.parseInt(docNumber),searchQuery,mode);
+            resultContainer.add(searchResultPanel);
+        }
+        javax.swing.SwingUtilities.invokeLater(new Runnable() {
+            public void run() { 
+                searchResultPane.getVerticalScrollBar().setValue(0);
+            }
+         });
+        searchResultPane.getViewport().setView(resultContainer);
     }
 
     /**
@@ -52,10 +71,6 @@ public class SearchResultPanel extends javax.swing.JPanel {
         searchTextField = new javax.swing.JTextField();
         searchBarSeparator = new javax.swing.JSeparator();
         searchResultPane = new javax.swing.JScrollPane();
-        paginationPanel = new javax.swing.JPanel();
-        testPageButton1 = new javax.swing.JButton();
-        testPageButton2 = new javax.swing.JButton();
-        testPageButton3 = new javax.swing.JButton();
         responseLabel = new javax.swing.JLabel();
         modeSelectPanel = new javax.swing.JPanel();
         orModeButton = new javax.swing.JRadioButton();
@@ -64,6 +79,11 @@ public class SearchResultPanel extends javax.swing.JPanel {
         advModeButton = new javax.swing.JRadioButton();
 
         searchButton.setText("Search");
+        searchButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                searchButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout searchBarPanelLayout = new javax.swing.GroupLayout(searchBarPanel);
         searchBarPanel.setLayout(searchBarPanelLayout);
@@ -86,34 +106,8 @@ public class SearchResultPanel extends javax.swing.JPanel {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        paginationPanel.setPreferredSize(new java.awt.Dimension(0, 32));
-
-        testPageButton1.setText("1");
-
-        testPageButton2.setText("2");
-
-        testPageButton3.setText("3");
-
-        javax.swing.GroupLayout paginationPanelLayout = new javax.swing.GroupLayout(paginationPanel);
-        paginationPanel.setLayout(paginationPanelLayout);
-        paginationPanelLayout.setHorizontalGroup(
-            paginationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(paginationPanelLayout.createSequentialGroup()
-                .addContainerGap(251, Short.MAX_VALUE)
-                .addComponent(testPageButton1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(testPageButton2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(testPageButton3)
-                .addContainerGap(251, Short.MAX_VALUE))
-        );
-        paginationPanelLayout.setVerticalGroup(
-            paginationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(paginationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                .addComponent(testPageButton1)
-                .addComponent(testPageButton2)
-                .addComponent(testPageButton3))
-        );
+        searchResultPane.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+        searchResultPane.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
         responseLabel.setText("Showing 420 results (0.5 seconds)");
 
@@ -128,6 +122,10 @@ public class SearchResultPanel extends javax.swing.JPanel {
         modeButtonGroup.add(advModeButton);
         advModeButton.setText("Advanced Query");
 
+        orModeButton.setActionCommand("0");
+        andModeButton.setActionCommand("1");
+        advModeButton.setActionCommand("2");
+
         javax.swing.GroupLayout modeSelectPanelLayout = new javax.swing.GroupLayout(modeSelectPanel);
         modeSelectPanel.setLayout(modeSelectPanelLayout);
         modeSelectPanelLayout.setHorizontalGroup(
@@ -141,7 +139,7 @@ public class SearchResultPanel extends javax.swing.JPanel {
                 .addComponent(andModeButton)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(advModeButton)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(253, Short.MAX_VALUE))
         );
         modeSelectPanelLayout.setVerticalGroup(
             modeSelectPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -159,7 +157,6 @@ public class SearchResultPanel extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(paginationPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 628, Short.MAX_VALUE)
                     .addComponent(searchBarPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(modeSelectPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(searchBarSeparator)
@@ -181,12 +178,19 @@ public class SearchResultPanel extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(responseLabel)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(searchResultPane, javax.swing.GroupLayout.DEFAULT_SIZE, 311, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(paginationPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(searchResultPane, javax.swing.GroupLayout.DEFAULT_SIZE, 348, Short.MAX_VALUE)
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
+
+    private void searchButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchButtonActionPerformed
+        JFrame parentFrame = (JFrame) SwingUtilities.getWindowAncestor(this);
+        SearchResultPanel resultPanel = new SearchResultPanel(searchTextField.getText(),Integer.parseInt(modeButtonGroup.getSelection().getActionCommand()));
+        parentFrame.getContentPane().remove(this);
+        parentFrame.setContentPane(resultPanel);
+        parentFrame.repaint();
+        parentFrame.validate();
+    }//GEN-LAST:event_searchButtonActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -195,7 +199,6 @@ public class SearchResultPanel extends javax.swing.JPanel {
     private javax.swing.ButtonGroup modeButtonGroup;
     private javax.swing.JPanel modeSelectPanel;
     private javax.swing.JRadioButton orModeButton;
-    private javax.swing.JPanel paginationPanel;
     private javax.swing.JLabel responseLabel;
     private javax.swing.JPanel searchBarPanel;
     private javax.swing.JSeparator searchBarSeparator;
@@ -203,8 +206,5 @@ public class SearchResultPanel extends javax.swing.JPanel {
     private javax.swing.JLabel searchModeLabel;
     private javax.swing.JScrollPane searchResultPane;
     private javax.swing.JTextField searchTextField;
-    private javax.swing.JButton testPageButton1;
-    private javax.swing.JButton testPageButton2;
-    private javax.swing.JButton testPageButton3;
     // End of variables declaration//GEN-END:variables
 }
