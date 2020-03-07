@@ -109,7 +109,7 @@
     </Container>
     <Component class="javax.swing.JLabel" name="responseLabel">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Showing 420 results (0.5 seconds)"/>
+        <Property name="text" type="java.lang.String" value="Result and Response Time"/>
       </Properties>
     </Component>
     <Container class="javax.swing.JPanel" name="modeSelectPanel">
