@@ -45,7 +45,6 @@ public class MakeDict {
         Set<String> keySort = dict.keySet();
 
         List<String> keys =  StringSorter.sortStringList(new ArrayList<String>(keySort));
-        WriteFile.writeData(data, target);
         data = "";
 
         for (int j = 0; j < keys.size();j++) {
