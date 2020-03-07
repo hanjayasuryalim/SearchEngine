@@ -16,4 +16,16 @@ public class ParseIntoXML {
             e.printStackTrace();
         }
     }
+    
+    public static void parsingDataset(String readPath,String writePath,String targetPath){
+        try{
+            CreateDirectory.createDir(targetPath);
+            String text = ReadFile.inputBasicFile(readPath);
+           
+           WriteFile.writeDatasetXML(text, writePath);
+            
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+    }
 }

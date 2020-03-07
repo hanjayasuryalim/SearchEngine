@@ -23,4 +23,20 @@ public class Parser {
             e.printStackTrace();
         }
     }
+    
+    public static void parsingDatasetIntoXML(String originPath,String targetPath){
+         try {
+            File folder = new File(originPath); 
+            String [] files = folder.list();
+            String xmlFiles;
+            
+            for (String file : files) {
+                xmlFiles = file.replace("txt", "xml");
+                ParseIntoXML.parsingDataset("Dataset/"+file,"DatasetXML/"+xmlFiles, targetPath);
+                
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 }

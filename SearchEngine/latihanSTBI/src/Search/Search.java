@@ -5,6 +5,7 @@
  */
 package Search;
 
+import Controller.Parser;
 import Utility.LoadDict;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -15,6 +16,7 @@ import java.util.Set;
 import preprocessing.Levensthein;
 import preprocessing.PreProcess;
 import preprocessing.Soundex;
+import View.MainGUI;
 
 public class Search {
 
@@ -22,22 +24,53 @@ public class Search {
     public static HashMap<String, ArrayList<Integer>> bodyDict = LoadDict.loadTitle("XML/AfterBody.tsv");
     public static HashMap<String, ArrayList<Integer>> dateDict = LoadDict.loadTitle("XML/AfterDate.tsv");
 
+    /*
     public static void main(String[] args) {
-        search("~ minimum");
-         
+        // search("miss ||      mirror        ", 3);
+        // Parser.parsingDatasetIntoXML("Dataset", "DatasetXML");
+        MainGUI mainGUI = new MainGUI();
     }
+    */
     
-    public static ArrayList<String> search(String query) {
-
+    public static ArrayList<String> search(String query,int mode) {
+        while(query.contains("  ")){
+            query = query.replace("  ", " ");
+        }
+        
+        while(query.endsWith(" ")){
+            query = query.substring(0, query.length()-1);
+        }
+        
+        while(query.startsWith(" ")){
+            query = query.substring(1, query.length());
+        }
+        
+        switch (mode){
+            case 0:
+                query = query.replace(" ", " || ");
+                break;
+            case 1 :
+                query = query.replace(" ", " && ");
+                break;
+        }
+        
             //START
         ArrayList<String>test = new ArrayList<>();
+        ArrayList<String>returnTest = new ArrayList<>();
         
         test = getDocs(query);
         
+        
         for (String string : test) {
-            System.out.println(string);
+            if(!returnTest.contains(string)){
+                returnTest.add(string);
+            }
         }
-        return test;
+        
+        for (String string : returnTest) {
+            System.out.print(string + ",");
+        }
+        return returnTest;
     }
     
     public static ArrayList<String> getDocs(String query){
@@ -137,9 +170,9 @@ public class Search {
             }
         }
         
-        if (myList.size() == 0) {
-            System.out.println("nothing");
-        }
+//        if (myList.size() == 0) {
+//            System.out.println("nothing");
+//        }
         return myList;
     }
 
