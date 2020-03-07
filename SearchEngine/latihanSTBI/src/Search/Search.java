@@ -27,10 +27,10 @@ public class Search {
     /*
     public static void main(String[] args) {
         // search("miss ||      mirror        ", 3);
-        // Parser.parsingDatasetIntoXML("Dataset", "DatasetXML");
-        MainGUI mainGUI = new MainGUI();
-    }
-    */
+       // Parser.parsingDatasetIntoXML("Dataset", "DatasetXML");
+       // MainGUI mainGUI = new MainGUI();
+    }*/
+    
     
     public static ArrayList<String> search(String query,int mode) {
         while(query.contains("  ")){
