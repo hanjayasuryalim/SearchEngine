@@ -20,16 +20,19 @@ import View.MainGUI;
 
 public class Search {
 
+    public static long startTime, endTime, timeElapsed;
+    
     public static HashMap<String, ArrayList<Integer>> titleDict = LoadDict.loadTitle("XML/AfterTitle.tsv");
     public static HashMap<String, ArrayList<Integer>> bodyDict = LoadDict.loadTitle("XML/AfterBody.tsv");
     public static HashMap<String, ArrayList<Integer>> dateDict = LoadDict.loadTitle("XML/AfterDate.tsv");
 
-    /*
+    /* Uncomment + run u/ generate datasetxml
     public static void main(String[] args) {
         // search("miss ||      mirror        ", 3);
-       // Parser.parsingDatasetIntoXML("Dataset", "DatasetXML");
-       // MainGUI mainGUI = new MainGUI();
-    }*/
+        Parser.parsingDatasetIntoXML("Dataset", "DatasetXML");
+        // MainGUI mainGUI = new MainGUI();
+    }
+    */
     
     
     public static ArrayList<String> search(String query,int mode) {
@@ -54,7 +57,8 @@ public class Search {
                 break;
         }
         
-            //START
+        //START
+        startTime = System.nanoTime();
         ArrayList<String>test = new ArrayList<>();
         ArrayList<String>returnTest = new ArrayList<>();
         
@@ -70,6 +74,8 @@ public class Search {
         for (String string : returnTest) {
             System.out.print(string + ",");
         }
+        endTime = System.nanoTime();
+        timeElapsed = endTime-startTime;
         return returnTest;
     }
     
@@ -174,6 +180,10 @@ public class Search {
 //            System.out.println("nothing");
 //        }
         return myList;
+    }
+    
+    public long getTimeElapsed(){
+        return timeElapsed;
     }
 
     private static ArrayList<Object> eval(ArrayList<Object> qList) {

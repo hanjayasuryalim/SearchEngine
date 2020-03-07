@@ -25,12 +25,19 @@ public class ResultLinePanel extends javax.swing.JPanel {
         initComponents();
         XMLDoc doc = new XMLDoc(targetDoc);
         titleLabel.setText(doc.getTitle());
-        String bodyPreview = doc.getBody();
-        if(bodyPreview.length() > 400){
-            bodyPreview = bodyPreview.substring(0,397);
-            bodyPreview = bodyPreview + "...";
+        dateLabel.setText(doc.getDate());
+        try{
+            String bodyPreview = doc.getBody();
+            if(bodyPreview.length() > 400){
+                bodyPreview = bodyPreview.substring(0,397);
+                bodyPreview = bodyPreview + "...";
+            }
+            bodyTextArea.setText(bodyPreview);
+        } catch(Exception e) {
+            bodyTextArea.setText("");
+            System.out.println("Document empty. Check DatabseXML folder.");
+            System.out.println(e);
         }
-        bodyTextArea.setText(bodyPreview);
     }
 
     /**
@@ -44,6 +51,7 @@ public class ResultLinePanel extends javax.swing.JPanel {
 
         titleLabel = new javax.swing.JLabel();
         bodyTextArea = new javax.swing.JTextArea();
+        dateLabel = new javax.swing.JLabel();
 
         titleLabel.setText("Document Title");
 
@@ -59,6 +67,10 @@ public class ResultLinePanel extends javax.swing.JPanel {
             }
         });
 
+        dateLabel.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
+        dateLabel.setForeground(new java.awt.Color(102, 102, 102));
+        dateLabel.setText("Date");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -68,7 +80,9 @@ public class ResultLinePanel extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(bodyTextArea)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(titleLabel)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(titleLabel)
+                            .addComponent(dateLabel))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -78,7 +92,9 @@ public class ResultLinePanel extends javax.swing.JPanel {
                 .addContainerGap()
                 .addComponent(titleLabel)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(bodyTextArea, javax.swing.GroupLayout.DEFAULT_SIZE, 15, Short.MAX_VALUE)
+                .addComponent(dateLabel)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(bodyTextArea, javax.swing.GroupLayout.DEFAULT_SIZE, 136, Short.MAX_VALUE)
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -94,6 +110,7 @@ public class ResultLinePanel extends javax.swing.JPanel {
  
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextArea bodyTextArea;
+    private javax.swing.JLabel dateLabel;
     private javax.swing.JLabel titleLabel;
     // End of variables declaration//GEN-END:variables
 }
