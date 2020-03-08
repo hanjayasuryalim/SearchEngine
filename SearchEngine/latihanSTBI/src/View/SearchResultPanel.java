@@ -58,6 +58,7 @@ public class SearchResultPanel extends javax.swing.JPanel {
         javax.swing.SwingUtilities.invokeLater(new Runnable() {
             public void run() { 
                 searchResultPane.getVerticalScrollBar().setValue(0);
+                searchResultPane.getVerticalScrollBar().setUnitIncrement(20);
             }
          });
         searchResultPane.getViewport().setView(resultContainer);
