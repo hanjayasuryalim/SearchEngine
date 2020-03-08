@@ -121,61 +121,63 @@ public class Search {
                 myList.add((Integer)i);
             }
         }
-          
-        //levensthein and Soundex
-        Soundex.initiate();
-        int threshold = 1;
-        ArrayList<String> titleValidWordList = new ArrayList<>();
-        for (String string : titleDict.keySet()) {
-            if (Levensthein.getLevenshteinDistance(word, string)<=threshold){
-                titleValidWordList.add(string);
+         
+        
+        if (word.length()>0){
+            //levensthein and Soundex
+            Soundex.initiate();
+            int threshold = 1;
+            ArrayList<String> titleValidWordList = new ArrayList<>();
+            for (String string : titleDict.keySet()) {
+                if (Levensthein.getLevenshteinDistance(word, string)<=threshold){
+                    titleValidWordList.add(string);
+                }
+
+                if(Soundex.execute(word, string)){
+                    titleValidWordList.add(string);
+                }
             }
-            
-            if(Soundex.execute(word, string)){
-                titleValidWordList.add(string);
+
+            //test leven title
+            System.out.println("LEVENSTHEIN TITLE");
+            for (String string : titleValidWordList) {
+                System.out.println(string);
+            }
+            System.out.println("==========================================\n\n\n\n");
+            //end test
+
+            for (String string : titleValidWordList) {
+                if (titleDict.get(string) != null) {
+                    myList.addAll(titleDict.get(string));
+                }
+            }
+
+
+            ArrayList<String> bodyValidWordList = new ArrayList<>();
+            for (String string : bodyDict.keySet()) {
+              if(Levensthein.getLevenshteinDistance(word, string)<=threshold){
+                  bodyValidWordList.add(string);
+              }
+
+              if(Soundex.execute(word, string)){
+                  bodyValidWordList.add(string);
+              }
+            }
+
+            //test leven title
+            System.out.println("LEVENSTHEIN BODY");
+            for (String string : bodyValidWordList) {
+                System.out.println(string);
+            }
+            System.out.println("==========================================\n\n\n\n");
+            //end test
+
+            for (String string : bodyValidWordList) {
+                if (bodyDict.get(string) != null) {
+                    myList = orOperation(myList,bodyDict.get(word));
+                }
             }
         }
-        
-        //test leven title
-        System.out.println("LEVENSTHEIN TITLE");
-        for (String string : titleValidWordList) {
-            System.out.println(string);
-        }
-        System.out.println("==========================================\n\n\n\n");
-        //end test
-        
-        for (String string : titleValidWordList) {
-            if (titleDict.get(string) != null) {
-                myList.addAll(titleDict.get(string));
-            }
-        }
-        
-        
-        ArrayList<String> bodyValidWordList = new ArrayList<>();
-        for (String string : bodyDict.keySet()) {
-          if(Levensthein.getLevenshteinDistance(word, string)<=threshold){
-              bodyValidWordList.add(string);
-          }
-          
-          if(Soundex.execute(word, string)){
-              bodyValidWordList.add(string);
-          }
-        }
-        
-        //test leven title
-        System.out.println("LEVENSTHEIN BODY");
-        for (String string : bodyValidWordList) {
-            System.out.println(string);
-        }
-        System.out.println("==========================================\n\n\n\n");
-        //end test
-        
-        for (String string : bodyValidWordList) {
-            if (bodyDict.get(string) != null) {
-                myList = orOperation(myList,bodyDict.get(word));
-            }
-        }
-        
 //        if (myList.size() == 0) {
 //            System.out.println("nothing");
 //        }
