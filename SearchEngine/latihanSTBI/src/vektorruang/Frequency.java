@@ -220,7 +220,7 @@ public class Frequency {
         for (int j = 0; j < keys.size();j++) {
             String key = keys.get(j);
             if (!key.equals("")){
-              data += key + ": [";
+              data += key + "= [";
 
               ArrayList<NoDocFrequency> values = dict.get(key);
               for (int i = 0; i < values.size(); i++) {
