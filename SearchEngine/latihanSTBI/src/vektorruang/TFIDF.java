@@ -69,7 +69,7 @@ public class TFIDF {
 //          saveIDF(hmDateIDF,"XML/IDFDate.csv");
 //          saveIDF(hmBodyIDF,"XML/IDFBody.csv");
 //          saveIDF(hmTitleIDF,"XML/IDFTitle.csv");
-//        
+//                
     }
     
     
@@ -140,5 +140,5 @@ public class TFIDF {
         
     }
     
-   
+
 }

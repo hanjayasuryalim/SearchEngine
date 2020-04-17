@@ -48,6 +48,34 @@ public class ReadCSV {
         return returnMap;
     }
     
+    public static HashMap<String,Double> getDataCSVIDF(String path) {
+        HashMap<String,Double> returnMap = new HashMap<>(); 
+       
+        String row;
+        double value;
+        
+        try{
+            BufferedReader csvReader = new BufferedReader(new FileReader(path));
+            while((row = csvReader.readLine())!=null){
+               
+                String [] data = null;
+                String [] subData = null;
+                
+                data = row.split("=");
+               
+              
+               
+                returnMap.put(data[0],Double.parseDouble(data[1]));
+               
+            }
+
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+
+        return returnMap;
+    }
+    
 //    public static void main(String[] args) {
 //       HashMap<String,ArrayList<NoDocValue>> returnMap = new HashMap<>(); 
 //       
