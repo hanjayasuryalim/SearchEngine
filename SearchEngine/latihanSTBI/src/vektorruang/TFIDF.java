@@ -27,9 +27,9 @@ public class TFIDF {
         HashMap<String, ArrayList<NoDocValue>> hmTitle = new HashMap<>();
         HashMap<String, ArrayList<NoDocValue>> hmBody = new HashMap<>();
 
-        hmDate = ReadCSV.getDataCSV(pathDate);
-        hmBody = ReadCSV.getDataCSV(pathBody);
-        hmTitle = ReadCSV.getDataCSV(pathTitle);
+//        hmDate = ReadCSV.getDataCSV(pathDate);
+//        hmBody = ReadCSV.getDataCSV(pathBody);
+//        hmTitle = ReadCSV.getDataCSV(pathTitle);
 
         // ===============================================================CREATE TF HASH MAP
 //        HashMap<String,ArrayList<NoDocValue>> hmDateTF = new HashMap<>();
@@ -39,6 +39,7 @@ public class TFIDF {
 //        hmDateTF = getHashMapTF(hmDate);
 //        hmTitleTF = getHashMapTF(hmTitle);
 //        hmBodyTF = getHashMapTF(hmBody);
+        
         //CHECKING
 //        printCheckHashMap(hmDateTF,"Date");
 //        printCheckHashMap(hmBodyTF,"Body");
