@@ -307,11 +307,15 @@ public class Frequency {
         ArrayList<String> queryTerms = getAllTermsInQuery(query);
 
         //Initialize HashMap
+        System.out.println("Query Frequency : ");
         for (String term : queryTerms) {
             int frequency = getTermsFrequency(term, query);
             NoDocValue value = new NoDocValue(0, Double.valueOf(frequency));
             queryFrequency.put(term, value);
+            
+            System.out.println("Term : " + term + " - " + frequency);
         }
+        System.out.println("\n\n");
 
         return queryFrequency;
     }
