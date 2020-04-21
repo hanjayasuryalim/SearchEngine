@@ -48,6 +48,38 @@ public class ReadCSV {
         return returnMap;
     }
     
+    public static HashMap<String,ArrayList<Integer>> getIntegerCSV(String path) {
+        HashMap<String,ArrayList<Integer>> returnMap = new HashMap<>(); 
+       
+        String row;
+        int value;
+        
+        try{
+            BufferedReader csvReader = new BufferedReader(new FileReader(path));
+            while((row = csvReader.readLine())!=null){
+                ArrayList<Integer> docList = new ArrayList<>();
+                String [] data = null;
+                String [] subData = null;
+                
+                data = row.split("=");
+                data[1] = data[1].replace("[","").replace("]", "").replace(" ", "").replace(";","");
+                subData = data[1].split(",");
+                
+                for (int i = 0; i < 500; i++) {
+                    value = Integer.valueOf(subData[i]);
+                    docList.add(value);
+                }
+                returnMap.put(data[0], docList);
+               
+            }
+
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+
+        return returnMap;
+    }
+    
     public static HashMap<String,Double> getDataCSVIDF(String path) {
         HashMap<String,Double> returnMap = new HashMap<>(); 
        

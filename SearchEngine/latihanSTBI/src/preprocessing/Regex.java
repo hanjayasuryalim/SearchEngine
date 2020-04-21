@@ -3,6 +3,13 @@
  */
 package preprocessing;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -14,7 +21,7 @@ public class Regex {
     public static boolean [] isToken(String [] tokens){
         
         String integerExp[] = {"^(\\+|-)?\\d+$"};
-        String dateExp[] = {"^(?:\\d{4}|\\d{1,2})[-/.](?:\\d{1,2}|j(anuary|an|AN|une|un|UN|uly|ul|UL)|f(ebruary|eb|EB)|m(arch|ar|AR|ay|AY)|a(pril|pr|PR|ugust|ug|UG)|s(eptember|ep|EP)|o(ctober|ct|CT)|n(ovember|ov|OV)|d(ecember|ec|EC))[-/.](?:\\d{4}|\\d{1,2})$"};
+        String dateExp[] = {"^(?:\\d{4}|\\d{1,2})[-/.](?:\\d{1,2}|J(anuary|an|AN|une|un|UN|uly|ul|UL)|F(ebruary|eb|EB)|M(arch|ar|AR|ay|AY)|A(pril|pr|PR|ugust|ug|UG)|S(eptember|ep|EP)|O(ctober|ct|CT)|N(ovember|ov|OV)|D(ecember|ec|EC))[-/.](?:\\d{4}|\\d{1,2})$"};
         String timeExp[] = {"^([aApP][mM])?(([0-1]?[0-9])|([2][0-3])):([0-5]?[0-9])(:([0-5]?[0-9]))?([aApP][mM])?$"};
         String urlExp[] = {"^(?i)((mailto\\:|(news|(ht|f)tp(s?))\\://){1}\\S+)?$", "^[a-zA-Z]+://(\\w+(-\\w+)*)(\\.(\\w+(-\\w+)*))*(\\?\\s*)?$", "^(http(s{0,1})://|www\\.)[a-zA-Z0-9_/\\-\\.]+\\.([A-Za-z/]{2,5})[a-zA-Z0-9_/\\&\\?\\=\\-\\.\\~\\%]*$"};
         String emailExp[] = {"^[\\w-]+(\\.[\\w-]+|\\.)*@[\\w-]+(\\.[\\w-]+)+$"};

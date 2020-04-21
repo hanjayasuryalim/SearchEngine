@@ -25,6 +25,71 @@ public class Frequency {
         }
     }
 
+    public void countTotalWord(){
+        ArrayList<Integer> dateCount = new ArrayList<>();
+        ArrayList<Integer> bodyCount = new ArrayList<>();
+        ArrayList<Integer> titleCount = new ArrayList<>();
+        
+        int n = 500;
+
+        for(int i = 1; i <= n; i++){
+            String from = "XML/Doc (" + i + ").xml";
+            File f = new File(from);
+
+            try {
+                DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
+                DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
+                // Document doc = dBuilder.parse(is);
+                Document doc = dBuilder.parse(f);
+
+                String date = (doc.getElementsByTagName("date").getLength() <= 0) ? ""
+                        : doc.getElementsByTagName("date").item(0).getTextContent();
+                System.out.println(date);
+                while (date.contains("  ")) {
+                    date = date.replace("  ", " ");
+                }
+                String[] arrDate = date.split(" ");
+                System.out.println(date);
+                dateCount.add(arrDate.length);
+
+                String title = (doc.getElementsByTagName("title").getLength() <= 0) ? ""
+                        : doc.getElementsByTagName("title").item(0).getTextContent();
+
+                while (title.contains("  ")) {
+                    title = title.replace("  ", " ");
+                }
+                String[] arrTitle = title.split(" ");
+                titleCount.add(arrTitle.length);
+
+                String body = (doc.getElementsByTagName("body").getLength() <= 0) ? ""
+                        : doc.getElementsByTagName("body").item(0).getTextContent();
+
+                while (body.contains("  ")) {
+                    body = body.replace("  ", " ");
+                }
+                String[] arrBody = body.split(" ");
+                bodyCount.add(arrBody.length);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            
+        }
+        saveWordCount(titleCount, "XML/TitleCount.csv");
+        saveWordCount(dateCount, "XML/DateCount.csv");
+        saveWordCount(bodyCount, "XML/BodyCount.csv");
+    }
+
+    public void saveWordCount(ArrayList<Integer> list, String target){
+        String s = list.get(0).toString();
+        for (int i = 1; i < list.size(); i++) {
+            s = s + "," + list.get(i).toString();
+            WriteFile.writeData(s, target);
+            s = "";
+        }
+        
+    }
+
+
     public void countTermFrequency() {
         //To store key
         ArrayList<String> termDate = new ArrayList<>();
@@ -247,6 +312,6 @@ public class Frequency {
 
     public static void main(String[] args) {
         Frequency f = new Frequency();
-        f.countTermFrequency();
+        f.countTotalWord();
     }
 }
