@@ -3,11 +3,9 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/Collegestuff/ITHB/Semester4/Sistem%20Temu%20Balik%20Informasi/Tugas/SearchEngine/SearchEngine/latihanSTBI/src/Utility/WriteIntoCSV.java</file>
-            <file>file:/D:/Collegestuff/ITHB/Semester4/Sistem%20Temu%20Balik%20Informasi/Tugas/SearchEngine/SearchEngine/latihanSTBI/src/vektorruang/TFIDF.java</file>
-            <file>file:/D:/Collegestuff/ITHB/Semester4/Sistem%20Temu%20Balik%20Informasi/Tugas/SearchEngine/SearchEngine/latihanSTBI/src/vektorruang/SearchTFIDF.java</file>
-            <file>file:/D:/Collegestuff/ITHB/Semester4/Sistem%20Temu%20Balik%20Informasi/Tugas/SearchEngine/SearchEngine/latihanSTBI/src/vektorruang/Frequency.java</file>
-            <file>file:/D:/Collegestuff/ITHB/Semester4/Sistem%20Temu%20Balik%20Informasi/Tugas/SearchEngine/SearchEngine/latihanSTBI/src/vektorruang/Weight.java</file>
+            <file>file:/D:/IF%20-%20Alex/Semester%204/Sistem%20Temu%20Balik%20Informasi/Tugas/SearchEngine/SearchEngine/latihanSTBI/src/Utility/ReadCSV.java</file>
+            <file>file:/D:/IF%20-%20Alex/Semester%204/Sistem%20Temu%20Balik%20Informasi/Tugas/SearchEngine/SearchEngine/latihanSTBI/src/preprocessing/PreProcess.java</file>
+            <file>file:/D:/IF%20-%20Alex/Semester%204/Sistem%20Temu%20Balik%20Informasi/Tugas/SearchEngine/SearchEngine/latihanSTBI/src/vektorruang/SearchTFIDF.java</file>
         </group>
     </open-files>
 </project-private>
