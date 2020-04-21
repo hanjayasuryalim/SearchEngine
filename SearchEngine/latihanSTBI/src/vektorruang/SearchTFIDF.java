@@ -80,8 +80,7 @@ public class SearchTFIDF {
         System.out.println("Document |dj| : ");
         for (int noDoc : relatedNoDoc) {
             arrDocWeight.get(noDoc).add(2, squareRootDouble(arrDocWeight.get(noDoc).get(1)));
-            System.out.println("No Doc: " + noDoc + " - " + arrDocWeight.get(noDoc).get(2)+" -- "+arrDocWeight.get(noDoc).get(0)+" -- ");
-            
+            System.out.println("No Doc: " + noDoc + " - " + arrDocWeight.get(noDoc).get(2)+" -- "+arrDocWeight.get(noDoc).get(0)+" -- ");          
         }
         System.out.println("\n\n");
         
@@ -105,7 +104,7 @@ public class SearchTFIDF {
         
         Collections.sort(keySetOfArrSim, Collections.reverseOrder());
         
-        printRanking();
+        ArrayList<Integer> listRanking = printRanking();
     }
     
     private static void fillArrDocWeight(ArrayList<NoDocValue> termWeight, double queryTermWeight) {
@@ -148,17 +147,23 @@ public class SearchTFIDF {
         return weightQuery;
     }
     
-    private static void printRanking() {
+    private static ArrayList<Integer> printRanking() {
+        ArrayList<Integer> listRanking = new ArrayList<>();
+        
         System.out.println("Ranking : ");
         System.out.println("-------------------------------------------------");
         for (int i = 0; i < keySetOfArrSim.size(); i++) {
             String documents = "";
             for (int noDoc : arrSim.get( keySetOfArrSim.get(i) )) {
-                documents += noDoc + ", ";
+                if (!listRanking.contains(noDoc)) {
+                    documents += noDoc + ", ";
+                }
             }
             
             System.out.println("No. " + (i+1) + " : " + documents.substring(0, documents.length()-2) + " with similarity = " + keySetOfArrSim.get(i));
         }
+        
+        return listRanking;
     }
     
     public static double squareRootDouble(double sumOfSquareWeight) {
