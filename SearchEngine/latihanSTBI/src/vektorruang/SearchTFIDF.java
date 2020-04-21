@@ -37,6 +37,8 @@ public class SearchTFIDF {
     //Query yang dimasukkan adalah query yang sudah dipreprocessing
     public static void getRanking(String query, String type)  {
         String[] arrQuery = query.split(" ");
+        arrDocWeight = new HashMap<>();
+        relatedNoDoc = new ArrayList<>();
         
         if (type.toLowerCase().equals("title")) {
             dictWeight = ReadCSV.getDataCSVWeight(PATHWEIGHTTITLE);
@@ -56,14 +58,21 @@ public class SearchTFIDF {
         for (String term : arrQuery) {
             //Get frequency and idf
             double frequency = queryFrequency.get(term).getValue();
-            double idf = dictIDF.get(term);
+            double idf;
+            if(dictIDF.get(term)!=null){
+                idf = dictIDF.get(term);
+            }else{
+                idf = 0;
+            }
+            
             
             NoDocValue queryWeight = new NoDocValue(0, getQueryWeight(frequency, idf));
             
-            dictWeight.get(term).add(queryWeight);
-            
-            //For filling arrDocWeight
-            fillArrDocWeight(dictWeight.get(term), queryWeight.getValue());
+            if(dictWeight.containsKey(term)){
+                dictWeight.get(term).add(queryWeight);
+                //For filling arrDocWeight
+                fillArrDocWeight(dictWeight.get(term), queryWeight.getValue());
+            }
         }
         System.out.println("\n\n");
         
@@ -71,7 +80,8 @@ public class SearchTFIDF {
         System.out.println("Document |dj| : ");
         for (int noDoc : relatedNoDoc) {
             arrDocWeight.get(noDoc).add(2, squareRootDouble(arrDocWeight.get(noDoc).get(1)));
-            System.out.println("No Doc: " + noDoc + " - " + arrDocWeight.get(noDoc).get(2));
+            System.out.println("No Doc: " + noDoc + " - " + arrDocWeight.get(noDoc).get(2)+" -- "+arrDocWeight.get(noDoc).get(0)+" -- ");
+            
         }
         System.out.println("\n\n");
         
@@ -160,6 +170,16 @@ public class SearchTFIDF {
     }
     
     public static void main(String[] args) {
-        SearchTFIDF.getRanking("j.c. jamaica joint", "Title");
+        String query="accessed computed";
+        String[]arr=query.split(" ");
+        String preprocessed="";
+        for (String string : arr) {
+            preprocessed += preprocessing.PreProcess.singleWordPreprocess(string)+" ";
+        }
+       preprocessed = preprocessed.substring(0,preprocessed.length()-1);
+        
+        SearchTFIDF.getRanking(preprocessed, "Body");
+        SearchTFIDF.getRanking(preprocessed, "Title");
+        SearchTFIDF.getRanking(preprocessed, "Date");
     }
 }
