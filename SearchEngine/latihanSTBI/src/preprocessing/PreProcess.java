@@ -8,9 +8,15 @@ package preprocessing;
 import Utility.ReadFile;
 import Utility.WriteFile;
 import java.io.File;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.Date;
+import java.util.Locale;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  *
@@ -36,7 +42,7 @@ public class PreProcess {
             for (int j = 0; j < documentRows.size(); j++) {
                 String line = documentRows.get(j);
 
-                line = line.toLowerCase().replace("(", " ").replace(")", " ").replace('"', ' ')
+                line = line.replace("(", " ").replace(")", " ").replace('"', ' ')
                         .replace("'", " ").replace("?", " ")
                         .replace(">", "> ").replace("<", " <");
 
@@ -47,8 +53,18 @@ public class PreProcess {
                 for (int k = 0; k < tokens.length; k++) {
                     // Jika bukan regex ;
                     if (!isRegex[k]) {
-                        tokens[k] = SymbolRemover.removeSymbol(tokens[k]);
+                        tokens[k] = SymbolRemover.removeSymbol(tokens[k]).toLowerCase();
 
+                    }else{
+                        String dateExp[] = {"^(?:\\d{4}|\\d{1,2})[-/.](?:\\d{1,2}|j(anuary|an|AN|une|un|UN|uly|ul|UL)|f(ebruary|eb|EB)|m(arch|ar|AR|ay|AY)|a(pril|pr|PR|ugust|ug|UG)|s(eptember|ep|EP)|o(ctober|ct|CT)|n(ovember|ov|OV)|d(ecember|ec|EC))[-/.](?:\\d{4}|\\d{1,2})$"};
+                        Pattern SubContentPattern = Pattern.compile(dateExp[0]);
+                        Matcher matcher = SubContentPattern.matcher(tokens[k]);
+                        System.out.println("_______________DATE ??? _____________");
+                        if (matcher.find()) {
+                            tokens[k] = normalizeDate(tokens[k]).toLowerCase();
+                        }else{
+                            tokens[k] = tokens[k].toLowerCase();
+                        }
                     }
                 }
 
@@ -89,7 +105,7 @@ public class PreProcess {
         for (int j = 0; j < words.size(); j++) {
             String line = words.get(j);
 
-            line = line.toLowerCase().replace("(", " ").replace(")", " ").replace('"', ' ')
+            line = line.replace("(", " ").replace(")", " ").replace('"', ' ')
                     .replace("'", " ").replace("?", " ")
                     .replace(">", "> ").replace("<", " <");
 
@@ -100,8 +116,17 @@ public class PreProcess {
             for (int k = 0; k < tokens.length; k++) {
                 // Jika bukan regex ;
                 if (!isRegex[k]) {
-                    tokens[k] = SymbolRemover.removeSymbol(tokens[k]);
-
+                    tokens[k] = SymbolRemover.removeSymbol(tokens[k].toLowerCase());
+                }else{
+                    String dateExp[] = {"^(?:\\d{4}|\\d{1,2})[-/.](?:\\d{1,2}|j(anuary|an|AN|une|un|UN|uly|ul|UL)|f(ebruary|eb|EB)|m(arch|ar|AR|ay|AY)|a(pril|pr|PR|ugust|ug|UG)|s(eptember|ep|EP)|o(ctober|ct|CT)|n(ovember|ov|OV)|d(ecember|ec|EC))[-/.](?:\\d{4}|\\d{1,2})$"};
+                    Pattern SubContentPattern = Pattern.compile(dateExp[0]);
+                    Matcher matcher = SubContentPattern.matcher(tokens[k]);
+                    System.out.println("_______________DATE ??? _____________");
+                    if (matcher.find()) {
+                        tokens[k] = normalizeDate(tokens[k]).toLowerCase();
+                    }else{
+                        tokens[k] = tokens[k].toLowerCase();
+                    }
                 }
             }
 
@@ -122,5 +147,49 @@ public class PreProcess {
 
         }
         return word;
+    }
+    
+    
+    private static String normalizeDate(String d) {
+        Date date;
+        DateFormat finalFormat = new SimpleDateFormat("dd-MMM-yy");
+        try {
+            DateFormat format = new SimpleDateFormat("dd-MM-yyyy", Locale.ENGLISH);
+            date = format.parse(d);
+            d = finalFormat.format(date);
+        } catch (Exception e) {
+        }
+        try {
+            DateFormat format = new SimpleDateFormat("dd-MM-yy", Locale.ENGLISH);
+            date = format.parse(d);
+            d = finalFormat.format(date);
+        } catch (Exception e) {
+        }
+        try {
+            DateFormat format = new SimpleDateFormat("dd-MMM-yyyy", Locale.ENGLISH);
+            date = format.parse(d);
+            d = finalFormat.format(date);
+        } catch (Exception e) {
+        }
+        try {
+            DateFormat format = new SimpleDateFormat("dd-M-yy", Locale.ENGLISH);
+            date = format.parse(d);
+            d = finalFormat.format(date);
+        } catch (Exception e) {
+        }
+        try {
+            DateFormat format = new SimpleDateFormat("dd-M-yyyy", Locale.ENGLISH);
+            date = format.parse(d);
+            d = finalFormat.format(date);
+        } catch (Exception e) {
+        }
+        try {
+            DateFormat format = new SimpleDateFormat("dd-MMM-yy", Locale.ENGLISH);
+            date = format.parse(d);
+            d = finalFormat.format(date);
+        } catch (Exception e) {
+        }
+        
+        return d;
     }
 }

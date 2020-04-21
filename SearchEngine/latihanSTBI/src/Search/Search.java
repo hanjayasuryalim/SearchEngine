@@ -98,6 +98,9 @@ public class Search {
         
         ArrayList<Integer> result = ((ArrayList)eval(queries));
         ArrayList<String> listDocument = new ArrayList<>();
+        if (result == null) {
+            result = new ArrayList();
+        }
         Collections.sort(result);
         for (int i = 0; i < result.size(); i++) {
             if (result.get(i) instanceof Integer){
