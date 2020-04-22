@@ -27,9 +27,9 @@ public class TFIDF {
         HashMap<String, ArrayList<NoDocValue>> hmTitle = new HashMap<>();
         HashMap<String, ArrayList<NoDocValue>> hmBody = new HashMap<>();
 
-//        hmDate = ReadCSV.getDataCSV(pathDate);
-//        hmBody = ReadCSV.getDataCSV(pathBody);
-//        hmTitle = ReadCSV.getDataCSV(pathTitle);
+        hmDate = ReadCSV.getDataCSV(pathDate);
+        hmBody = ReadCSV.getDataCSV(pathBody);
+        hmTitle = ReadCSV.getDataCSV(pathTitle);
 
         // ===============================================================CREATE TF HASH MAP
 //        HashMap<String,ArrayList<NoDocValue>> hmDateTF = new HashMap<>();
@@ -49,17 +49,17 @@ public class TFIDF {
 //        save(hmBodyTF,"XML/TFBody.csv");
 //        save(hmTitleTF,"XML/TFTitle.csv");
         //==============================================================- CREATE IDF HASH MAP
-//        HashMap<String,Double> hmDateIDF = new HashMap<>();
-//        HashMap<String,Double> hmTitleIDF = new HashMap<>();
-//        HashMap<String,Double> hmBodyIDF = new HashMap<>();
+        HashMap<String,Double> hmDateIDF = new HashMap<>();
+        HashMap<String,Double> hmTitleIDF = new HashMap<>();
+        HashMap<String,Double> hmBodyIDF = new HashMap<>();
 //        
-//        hmDateIDF = getIDF(hmDate);
-//        hmTitleIDF = getIDF(hmTitle);
-//        hmBodyIDF = getIDF(hmBody);
+        hmDateIDF = getIDF(hmDate);
+        hmTitleIDF = getIDF(hmTitle);
+        hmBodyIDF = getIDF(hmBody);
         //SAVING INTO CSV
-//          saveIDF(hmDateIDF,"XML/IDFDate.csv");
-//          saveIDF(hmBodyIDF,"XML/IDFBody.csv");
-//          saveIDF(hmTitleIDF,"XML/IDFTitle.csv");
+          saveIDF(hmDateIDF,"XML/IDFDate.csv");
+          saveIDF(hmBodyIDF,"XML/IDFBody.csv");
+          saveIDF(hmTitleIDF,"XML/IDFTitle.csv");
 //                
     }
 
