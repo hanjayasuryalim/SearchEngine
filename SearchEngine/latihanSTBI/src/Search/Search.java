@@ -90,6 +90,7 @@ public class Search {
             if (queryPart[i].equals("&&") || queryPart[i].equals("||") || queryPart[i].equals("(") || queryPart[i].equals(")") || queryPart[i].equals("~") ){
                 queries.add(queryPart[i]);            
             }else{
+                System.out.println("Query Part = " + queryPart[i]);
                 queries.add(getList(queryPart[i]));
             }
             

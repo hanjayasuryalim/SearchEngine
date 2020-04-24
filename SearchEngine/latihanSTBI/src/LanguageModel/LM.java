@@ -66,6 +66,18 @@ public class LM{
         
         
         String [] words = query.split(" ");
+        
+        for (int i = 0; i < words.length; i++) {
+            words[i] = PreProcess.singleWordPreprocess(words[i]);
+            
+        }
+            
+        query = String.join(" ", words);
+        while (query.contains("  ")){
+            query = query.replace("  "," ");
+        }
+        words = query.split(" ");
+        
         termTotalFrequency = new HashMap<>();
         termFrequency = new HashMap<>();
         for (int i = 0; i < words.length; i++) {
@@ -126,7 +138,7 @@ public class LM{
         System.out.println("RANKING : ");
         
         rankedDocNo = new ArrayList<>();
-        
+        System.out.println("");
         for (int i = 0; i < listDocsId.size(); i++) {
             double p = 0.0;
             int index = 0;
@@ -136,7 +148,7 @@ public class LM{
                     index = j;
                 }
             }
-            System.out.println(listDocsId.get(index));
+            System.out.print(listDocsId.get(index) + ", ");
             rankedDocNo.add(listDocsId.get(index));
             probs.set(index , 0.0);
         }
@@ -145,6 +157,6 @@ public class LM{
     
     
     public static void main(String[] args) {
-        LM langModel = new LM("9-Mar-87");
+        LM langModel = new LM("Chairman closed the last");
     }
 }
