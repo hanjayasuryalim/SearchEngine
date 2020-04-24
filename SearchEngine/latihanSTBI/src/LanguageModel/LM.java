@@ -1,6 +1,5 @@
 package LanguageModel;
 
-import Model.NoDocValue;
 import Search.Search;
 import Utility.ReadCSV;
 import Utility.ReadFile;
@@ -26,6 +25,7 @@ public class LM{
         
         //Search query dengan mode OR
         ArrayList<String> listDocs = Search.search(query, 0);
+        System.out.println("Founded = " + listDocs.size());
         listDocsId = new ArrayList<>();
         listDocs.forEach(docName -> listDocsId.add(Integer.valueOf(docName)));
         
@@ -145,8 +145,6 @@ public class LM{
     
     
     public static void main(String[] args) {
-        LM langModel = new LM("9-03-97");
-        double a = Double.valueOf("5")/ Double.valueOf("3");
-        System.out.println(a);
+        LM langModel = new LM("9-Mar-87");
     }
 }

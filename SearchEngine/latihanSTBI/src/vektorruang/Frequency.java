@@ -340,8 +340,9 @@ public class Frequency {
 
     public static void main(String[] args) {
         Frequency f = new Frequency();
-        
+        f.countTotalWord();
         f.countTermFrequency();
+        
     }
 
     private static ArrayList<String> getAllTermsInQuery(String query) {

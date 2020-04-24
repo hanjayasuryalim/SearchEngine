@@ -11,7 +11,6 @@ import java.io.File;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.Date;
 import java.util.Locale;
@@ -56,7 +55,7 @@ public class PreProcess {
                         tokens[k] = SymbolRemover.removeSymbol(tokens[k]).toLowerCase();
 
                     }else{
-                        String dateExp[] = {"^(?:\\d{4}|\\d{1,2})[-/.](?:\\d{1,2}|j(anuary|an|AN|une|un|UN|uly|ul|UL)|f(ebruary|eb|EB)|m(arch|ar|AR|ay|AY)|a(pril|pr|PR|ugust|ug|UG)|s(eptember|ep|EP)|o(ctober|ct|CT)|n(ovember|ov|OV)|d(ecember|ec|EC))[-/.](?:\\d{4}|\\d{1,2})$"};
+                        String dateExp[] = {"^(?:\\d{4}|\\d{1,2})[-/.](?:\\d{1,2}|J(anuary|an|AN|une|un|UN|uly|ul|UL)|F(ebruary|eb|EB)|M(arch|ar|AR|ay|AY)|A(pril|pr|PR|ugust|ug|UG)|S(eptember|ep|EP)|O(ctober|ct|CT)|N(ovember|ov|OV)|D(ecember|ec|EC))[-/.](?:\\d{4}|\\d{1,2})$"};
                         Pattern SubContentPattern = Pattern.compile(dateExp[0]);
                         Matcher matcher = SubContentPattern.matcher(tokens[k]);
                         System.out.println("_______________DATE ??? _____________");
@@ -118,7 +117,7 @@ public class PreProcess {
                 if (!isRegex[k]) {
                     tokens[k] = SymbolRemover.removeSymbol(tokens[k].toLowerCase());
                 }else{
-                    String dateExp[] = {"^(?:\\d{4}|\\d{1,2})[-/.](?:\\d{1,2}|j(anuary|an|AN|une|un|UN|uly|ul|UL)|f(ebruary|eb|EB)|m(arch|ar|AR|ay|AY)|a(pril|pr|PR|ugust|ug|UG)|s(eptember|ep|EP)|o(ctober|ct|CT)|n(ovember|ov|OV)|d(ecember|ec|EC))[-/.](?:\\d{4}|\\d{1,2})$"};
+                    String dateExp[] = {"^(?:\\d{4}|\\d{1,2})[-/.](?:\\d{1,2}|J(anuary|an|AN|une|un|UN|uly|ul|UL)|F(ebruary|eb|EB)|M(arch|ar|AR|ay|AY)|A(pril|pr|PR|ugust|ug|UG)|S(eptember|ep|EP)|O(ctober|ct|CT)|N(ovember|ov|OV)|D(ecember|ec|EC))[-/.](?:\\d{4}|\\d{1,2})$"};
                     Pattern SubContentPattern = Pattern.compile(dateExp[0]);
                     Matcher matcher = SubContentPattern.matcher(tokens[k]);
                     System.out.println("_______________DATE ??? _____________");
@@ -191,5 +190,8 @@ public class PreProcess {
         }
         
         return d;
+    }
+    public static void main(String[] args) {
+        PreProcess.preprocess();
     }
 }

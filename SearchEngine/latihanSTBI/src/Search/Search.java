@@ -118,6 +118,7 @@ public class Search {
     public static ArrayList<Integer> getList(String word) {
         System.out.println("Word : "+word);
         word = PreProcess.singleWordPreprocess(word);
+        System.out.println("Word : "+word);
         ArrayList<Integer> myList = new ArrayList<>();
         if (word.equals("")){
             for (int i = 1; i <= 500; i++) {
