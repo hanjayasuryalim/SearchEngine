@@ -180,6 +180,23 @@ public class Search {
                     myList = orOperation(myList,bodyDict.get(word));
                 }
             }
+            
+            
+            
+            //leven date
+            ArrayList<String> dateValidWordList = new ArrayList<>();
+            for (String string : dateDict.keySet()) {
+                if(Levensthein.getLevenshteinDistance(word, string)<=threshold){
+                    dateValidWordList.add(string);
+                }
+            }
+            
+            for (String string : dateValidWordList) {
+                if (dateDict.get(string) != null) {
+                    myList = orOperation(myList,dateDict.get(word));
+                }
+            }
+            
         }
 //        if (myList.size() == 0) {
 //            System.out.println("nothing");
