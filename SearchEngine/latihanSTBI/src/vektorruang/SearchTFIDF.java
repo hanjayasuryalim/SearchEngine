@@ -7,7 +7,8 @@ import java.util.Collections;
 import java.util.HashMap;
 
 public class SearchTFIDF {
-    
+    //variable to combine all ranking
+    private static ArrayList<Integer>TotalListRanking = new ArrayList<>();
     //Path untuk ke CSV Weight
     private static final String PATHWEIGHTTITLE = "XML/WeightTitle.csv";
     private static final String PATHWEIGHTBODY = "XML/WeightBody.csv";
@@ -130,7 +131,7 @@ public class SearchTFIDF {
                 
                 //Add no document to ArrayList relatedNoDoc
                 relatedNoDoc.add(noDoc);
-                System.out.println("No Doc : " + noDoc + " - " + weight + ", " + squareWeight);
+               // System.out.println("No Doc : " + noDoc + " - " + weight + ", " + squareWeight);
             }
         }
     }
@@ -158,6 +159,9 @@ public class SearchTFIDF {
                 if (!listRanking.contains(noDoc)) {
                     documents += noDoc + ", ";
                 }
+                if(!TotalListRanking.contains(noDoc)){
+                    TotalListRanking.add(noDoc);
+                }
             }
             
             System.out.println("No. " + (i+1) + " : " + documents.substring(0, documents.length()-2) + " with similarity = " + keySetOfArrSim.get(i));
@@ -175,7 +179,7 @@ public class SearchTFIDF {
     }
     
     public static void main(String[] args) {
-        String query="accessed computed";
+        String query="accessed 9-Mar-87";
         String[]arr=query.split(" ");
         String preprocessed="";
         for (String string : arr) {
@@ -186,5 +190,9 @@ public class SearchTFIDF {
         SearchTFIDF.getRanking(preprocessed, "Body");
         SearchTFIDF.getRanking(preprocessed, "Title");
         SearchTFIDF.getRanking(preprocessed, "Date");
+        System.out.println("\n\n\n");
+        for (Integer rank : TotalListRanking) {
+            System.out.println(rank);
+        }
     }
 }

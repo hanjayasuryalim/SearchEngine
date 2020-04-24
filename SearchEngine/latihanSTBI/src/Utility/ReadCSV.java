@@ -21,9 +21,9 @@ public class ReadCSV {
         int noDoc;
         double value;
         
-//        System.out.println("Reading " + path + " : ");
-//        System.out.println("--------------------------------------");
-//        System.out.println("Start");
+        System.out.println("Reading " + path + " : ");
+        System.out.println("--------------------------------------");
+        System.out.println("Start");
         
         try {
             BufferedReader csvReader = new BufferedReader(new FileReader(path));
@@ -40,14 +40,14 @@ public class ReadCSV {
                 //Get document no document and value
                 for (String sub : subData) {
                     String[] noDocAndValue = sub.replace(" ", "").split("\\|");
-//                    System.out.print("[" + noDocAndValue[0] + "|" + noDocAndValue[1] + "]");
+                    System.out.print("[" + noDocAndValue[0] + "|" + noDocAndValue[1] + "]");
                     
                     value = Double.parseDouble(noDocAndValue[1]);
                     noDoc = Integer.parseInt(noDocAndValue[0]);
                     NoDocValue doc = new NoDocValue(noDoc, value);
                     docList.add(doc);
                 }
-//                System.out.println("");
+                System.out.println("");
                 
                 returnMap.put(data[0], docList);
 
@@ -57,8 +57,8 @@ public class ReadCSV {
             e.printStackTrace();
         }
         
-//        System.out.println("End");
-//        System.out.println("--------------------------------------");
+        System.out.println("End");
+        System.out.println("--------------------------------------");
         return returnMap;
     }
 

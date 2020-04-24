@@ -32,13 +32,13 @@ public class TFIDF {
         hmTitle = ReadCSV.getDataCSV(pathTitle);
 
         // ===============================================================CREATE TF HASH MAP
-//        HashMap<String,ArrayList<NoDocValue>> hmDateTF = new HashMap<>();
-//        HashMap<String,ArrayList<NoDocValue>> hmTitleTF = new HashMap<>();
-//        HashMap<String,ArrayList<NoDocValue>> hmBodyTF = new HashMap<>();
-//        
-//        hmDateTF = getHashMapTF(hmDate);
-//        hmTitleTF = getHashMapTF(hmTitle);
-//        hmBodyTF = getHashMapTF(hmBody);
+        HashMap<String,ArrayList<NoDocValue>> hmDateTF = new HashMap<>();
+        HashMap<String,ArrayList<NoDocValue>> hmTitleTF = new HashMap<>();
+        HashMap<String,ArrayList<NoDocValue>> hmBodyTF = new HashMap<>();
+        
+        hmDateTF = getHashMapTF(hmDate);
+        hmTitleTF = getHashMapTF(hmTitle);
+        hmBodyTF = getHashMapTF(hmBody);
         
         //CHECKING
 //        printCheckHashMap(hmDateTF,"Date");
