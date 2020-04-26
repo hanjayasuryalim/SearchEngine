@@ -90,6 +90,7 @@ public class Search {
             if (queryPart[i].equals("&&") || queryPart[i].equals("||") || queryPart[i].equals("(") || queryPart[i].equals(")") || queryPart[i].equals("~") ){
                 queries.add(queryPart[i]);            
             }else{
+                System.out.println("Query Part = " + queryPart[i]);
                 queries.add(getList(queryPart[i]));
             }
             
@@ -98,6 +99,9 @@ public class Search {
         
         ArrayList<Integer> result = ((ArrayList)eval(queries));
         ArrayList<String> listDocument = new ArrayList<>();
+        if (result == null) {
+            result = new ArrayList();
+        }
         Collections.sort(result);
         for (int i = 0; i < result.size(); i++) {
             if (result.get(i) instanceof Integer){
@@ -115,6 +119,7 @@ public class Search {
     public static ArrayList<Integer> getList(String word) {
         System.out.println("Word : "+word);
         word = PreProcess.singleWordPreprocess(word);
+        System.out.println("Word : "+word);
         ArrayList<Integer> myList = new ArrayList<>();
         if (word.equals("")){
             for (int i = 1; i <= 500; i++) {
@@ -177,6 +182,23 @@ public class Search {
                     myList = orOperation(myList,bodyDict.get(word));
                 }
             }
+            
+            
+            
+            //leven date
+            ArrayList<String> dateValidWordList = new ArrayList<>();
+            for (String string : dateDict.keySet()) {
+                if(Levensthein.getLevenshteinDistance(word, string)<=threshold){
+                    dateValidWordList.add(string);
+                }
+            }
+            
+            for (String string : dateValidWordList) {
+                if (dateDict.get(string) != null) {
+                    myList = orOperation(myList,dateDict.get(word));
+                }
+            }
+            
         }
 //        if (myList.size() == 0) {
 //            System.out.println("nothing");

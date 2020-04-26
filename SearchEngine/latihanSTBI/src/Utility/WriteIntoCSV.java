@@ -79,7 +79,8 @@ public class WriteIntoCSV {
 
               ArrayList<NoDocValue> values = dict.get(key);
               for (int i = 0; i < values.size(); i++) {
-                  data += String.valueOf(values.get(i).getNoDoc()) + "|"+String.valueOf(values.get(i).getValue())+", ";
+
+                  data += String.valueOf(values.get(i).getNoDoc()+1) + "|"+String.valueOf(values.get(i).getValue())+", ";
               }
 
               data = data.substring(0, data.length()-2);

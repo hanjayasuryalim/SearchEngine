@@ -33,6 +33,26 @@ public class ReadFile {
 
         return null;
     }
+    
+    public static String inputSingleLineFile(String path) {
+        try {
+            File fileInput = new File(path);
+            FileReader fr = new FileReader(fileInput);
+            BufferedReader br = new BufferedReader(fr);
+            String text = "";
+            String line;
+            ArrayList<String> docRows = new ArrayList<>();
+            while ((line = br.readLine()) != null) {
+                text+=line;
+            }
+            return text;
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return null;
+    }
 
     public static String inputBasicFile(String path) {
         try {

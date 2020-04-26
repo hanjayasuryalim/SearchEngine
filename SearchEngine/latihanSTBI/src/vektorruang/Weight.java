@@ -53,9 +53,9 @@ public class Weight {
         hmBodyWeight = calculateWeightHashMap(hmBodyTF, hmBodyIDF);
 
         //SAVE WEIGHT
-//        saveWeight(hmDateWeight,"XML/WeightDate.csv");
-//        saveWeight(hmBodyWeight,"XML/WeightBody.csv");
-//        saveWeight(hmTitleWeight,"XML/WeightTitle.csv");
+        saveWeight(hmDateWeight,"XML/WeightDate.csv");
+        saveWeight(hmBodyWeight,"XML/WeightBody.csv");
+        saveWeight(hmTitleWeight,"XML/WeightTitle.csv");
         //checking
 //        printCheckHashMap(hmDateWeight,"Date");
 //        printCheckHashMap(hmTitleWeight,"Title");

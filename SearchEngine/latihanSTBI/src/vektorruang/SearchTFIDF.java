@@ -7,7 +7,8 @@ import java.util.Collections;
 import java.util.HashMap;
 
 public class SearchTFIDF {
-    
+    //variable to combine all ranking
+    private static ArrayList<Integer>TotalListRanking = new ArrayList<>();
     //Path untuk ke CSV Weight
     private static final String PATHWEIGHTTITLE = "XML/WeightTitle.csv";
     private static final String PATHWEIGHTBODY = "XML/WeightBody.csv";
@@ -37,6 +38,8 @@ public class SearchTFIDF {
     //Query yang dimasukkan adalah query yang sudah dipreprocessing
     public static void getRanking(String query, String type)  {
         String[] arrQuery = query.split(" ");
+        arrDocWeight = new HashMap<>();
+        relatedNoDoc = new ArrayList<>();
         
         if (type.toLowerCase().equals("title")) {
             dictWeight = ReadCSV.getDataCSVWeight(PATHWEIGHTTITLE);
@@ -56,14 +59,21 @@ public class SearchTFIDF {
         for (String term : arrQuery) {
             //Get frequency and idf
             double frequency = queryFrequency.get(term).getValue();
-            double idf = dictIDF.get(term);
+            double idf;
+            if(dictIDF.get(term)!=null){
+                idf = dictIDF.get(term);
+            }else{
+                idf = 0;
+            }
+            
             
             NoDocValue queryWeight = new NoDocValue(0, getQueryWeight(frequency, idf));
             
-            dictWeight.get(term).add(queryWeight);
-            
-            //For filling arrDocWeight
-            fillArrDocWeight(dictWeight.get(term), queryWeight.getValue());
+            if(dictWeight.containsKey(term)){
+                dictWeight.get(term).add(queryWeight);
+                //For filling arrDocWeight
+                fillArrDocWeight(dictWeight.get(term), queryWeight.getValue());
+            }
         }
         System.out.println("\n\n");
         
@@ -71,7 +81,7 @@ public class SearchTFIDF {
         System.out.println("Document |dj| : ");
         for (int noDoc : relatedNoDoc) {
             arrDocWeight.get(noDoc).add(2, squareRootDouble(arrDocWeight.get(noDoc).get(1)));
-            System.out.println("No Doc: " + noDoc + " - " + arrDocWeight.get(noDoc).get(2));
+            System.out.println("No Doc: " + noDoc + " - " + arrDocWeight.get(noDoc).get(2)+" -- "+arrDocWeight.get(noDoc).get(0)+" -- ");          
         }
         System.out.println("\n\n");
         
@@ -95,7 +105,7 @@ public class SearchTFIDF {
         
         Collections.sort(keySetOfArrSim, Collections.reverseOrder());
         
-        printRanking();
+        ArrayList<Integer> listRanking = printRanking();
     }
     
     private static void fillArrDocWeight(ArrayList<NoDocValue> termWeight, double queryTermWeight) {
@@ -121,7 +131,7 @@ public class SearchTFIDF {
                 
                 //Add no document to ArrayList relatedNoDoc
                 relatedNoDoc.add(noDoc);
-                System.out.println("No Doc : " + noDoc + " - " + weight + ", " + squareWeight);
+               // System.out.println("No Doc : " + noDoc + " - " + weight + ", " + squareWeight);
             }
         }
     }
@@ -138,17 +148,26 @@ public class SearchTFIDF {
         return weightQuery;
     }
     
-    private static void printRanking() {
+    private static ArrayList<Integer> printRanking() {
+        ArrayList<Integer> listRanking = new ArrayList<>();
+        
         System.out.println("Ranking : ");
         System.out.println("-------------------------------------------------");
         for (int i = 0; i < keySetOfArrSim.size(); i++) {
             String documents = "";
             for (int noDoc : arrSim.get( keySetOfArrSim.get(i) )) {
-                documents += noDoc + ", ";
+                if (!listRanking.contains(noDoc)) {
+                    documents += noDoc + ", ";
+                }
+                if(!TotalListRanking.contains(noDoc)){
+                    TotalListRanking.add(noDoc);
+                }
             }
             
             System.out.println("No. " + (i+1) + " : " + documents.substring(0, documents.length()-2) + " with similarity = " + keySetOfArrSim.get(i));
         }
+        
+        return listRanking;
     }
     
     public static double squareRootDouble(double sumOfSquareWeight) {
@@ -160,6 +179,20 @@ public class SearchTFIDF {
     }
     
     public static void main(String[] args) {
-        SearchTFIDF.getRanking("j.c. jamaica joint", "Title");
+        String query="accessed 9-Mar-87";
+        String[]arr=query.split(" ");
+        String preprocessed="";
+        for (String string : arr) {
+            preprocessed += preprocessing.PreProcess.singleWordPreprocess(string)+" ";
+        }
+       preprocessed = preprocessed.substring(0,preprocessed.length()-1);
+        
+        SearchTFIDF.getRanking(preprocessed, "Body");
+        SearchTFIDF.getRanking(preprocessed, "Title");
+        SearchTFIDF.getRanking(preprocessed, "Date");
+        System.out.println("\n\n\n");
+        for (Integer rank : TotalListRanking) {
+            System.out.println(rank);
+        }
     }
 }
