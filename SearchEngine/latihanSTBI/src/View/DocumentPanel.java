@@ -44,6 +44,7 @@ public class DocumentPanel extends javax.swing.JPanel {
         jScrollPane1 = new javax.swing.JScrollPane();
         documentBodyTextArea = new javax.swing.JTextArea();
         documentDateLabel = new javax.swing.JLabel();
+        scoreLabel = new javax.swing.JLabel();
 
         backButton.setText("Back");
         backButton.addActionListener(new java.awt.event.ActionListener() {
@@ -64,6 +65,8 @@ public class DocumentPanel extends javax.swing.JPanel {
 
         documentDateLabel.setText("Date : ");
 
+        scoreLabel.setText("Score : ");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -80,6 +83,9 @@ public class DocumentPanel extends javax.swing.JPanel {
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(documentDateLabel)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(scoreLabel)
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -92,10 +98,12 @@ public class DocumentPanel extends javax.swing.JPanel {
                     .addComponent(documentTitleLabel))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(scoreLabel)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(documentDateLabel)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 400, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 380, Short.MAX_VALUE)
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -117,5 +125,6 @@ public class DocumentPanel extends javax.swing.JPanel {
     private javax.swing.JLabel documentTitleLabel;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JLabel scoreLabel;
     // End of variables declaration//GEN-END:variables
 }

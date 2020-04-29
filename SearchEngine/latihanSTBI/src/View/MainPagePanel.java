@@ -37,6 +37,7 @@ public class MainPagePanel extends javax.swing.JPanel {
     private void initComponents() {
 
         modeButtonGroup = new javax.swing.ButtonGroup();
+        modelButtonGroup = new javax.swing.ButtonGroup();
         searchTextField = new javax.swing.JTextField();
         searchButton = new javax.swing.JButton();
         paddingPanel1 = new javax.swing.JPanel();
@@ -46,6 +47,11 @@ public class MainPagePanel extends javax.swing.JPanel {
         andModeButton = new javax.swing.JRadioButton();
         orModeButton = new javax.swing.JRadioButton();
         searchModeLabel = new javax.swing.JLabel();
+        outputNumberSpinner = new javax.swing.JSpinner();
+        probabilisticModelButton = new javax.swing.JRadioButton();
+        searchModelLabel = new javax.swing.JLabel();
+        languageModelButton = new javax.swing.JRadioButton();
+        resultAmountLabel = new javax.swing.JLabel();
         logoImageLabel = new javax.swing.JLabel();
 
         searchButton.setText("Search");
@@ -93,6 +99,20 @@ public class MainPagePanel extends javax.swing.JPanel {
 
         searchModeLabel.setText("Search Mode");
 
+        outputNumberSpinner.setModel(new javax.swing.SpinnerNumberModel(10, 10, null, 10));
+        outputNumberSpinner.setMinimumSize(new java.awt.Dimension(41, 20));
+
+        modelButtonGroup.add(probabilisticModelButton);
+        probabilisticModelButton.setSelected(true);
+        probabilisticModelButton.setText("Probabilistic");
+
+        searchModelLabel.setText("Model");
+
+        modelButtonGroup.add(languageModelButton);
+        languageModelButton.setText("Language Model");
+
+        resultAmountLabel.setText("Result Amount");
+
         advModeButton.setActionCommand("2");
         andModeButton.setActionCommand("1");
         orModeButton.setActionCommand("0");
@@ -103,24 +123,43 @@ public class MainPagePanel extends javax.swing.JPanel {
             modeSelectPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(modeSelectPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(searchModeLabel)
+                .addGroup(modeSelectPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(resultAmountLabel)
+                    .addComponent(searchModeLabel)
+                    .addComponent(searchModelLabel))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(orModeButton)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(andModeButton)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(advModeButton)
-                .addContainerGap(266, Short.MAX_VALUE))
+                .addGroup(modeSelectPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(modeSelectPanelLayout.createSequentialGroup()
+                        .addComponent(orModeButton)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(andModeButton)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(advModeButton))
+                    .addGroup(modeSelectPanelLayout.createSequentialGroup()
+                        .addComponent(probabilisticModelButton)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(languageModelButton))
+                    .addComponent(outputNumberSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(252, Short.MAX_VALUE))
         );
         modeSelectPanelLayout.setVerticalGroup(
             modeSelectPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, modeSelectPanelLayout.createSequentialGroup()
+            .addGroup(modeSelectPanelLayout.createSequentialGroup()
                 .addContainerGap()
+                .addGroup(modeSelectPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(probabilisticModelButton)
+                    .addComponent(searchModelLabel)
+                    .addComponent(languageModelButton))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(modeSelectPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(orModeButton)
                     .addComponent(andModeButton)
                     .addComponent(advModeButton)
                     .addComponent(searchModeLabel))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(modeSelectPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(outputNumberSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(resultAmountLabel))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -161,7 +200,6 @@ public class MainPagePanel extends javax.swing.JPanel {
                     .addComponent(paddingPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 468, Short.MAX_VALUE)
                     .addComponent(paddingPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 468, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(logoImageLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -187,14 +225,20 @@ public class MainPagePanel extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JRadioButton advModeButton;
     private javax.swing.JRadioButton andModeButton;
+    private javax.swing.JRadioButton languageModelButton;
     private javax.swing.JLabel logoImageLabel;
     private javax.swing.ButtonGroup modeButtonGroup;
     private javax.swing.JPanel modeSelectPanel;
+    private javax.swing.ButtonGroup modelButtonGroup;
     private javax.swing.JRadioButton orModeButton;
+    private javax.swing.JSpinner outputNumberSpinner;
     private javax.swing.JPanel paddingPanel1;
     private javax.swing.JPanel paddingPanel2;
+    private javax.swing.JRadioButton probabilisticModelButton;
+    private javax.swing.JLabel resultAmountLabel;
     private javax.swing.JButton searchButton;
     private javax.swing.JLabel searchModeLabel;
+    private javax.swing.JLabel searchModelLabel;
     private javax.swing.JTextField searchTextField;
     // End of variables declaration//GEN-END:variables
 }

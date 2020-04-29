@@ -179,7 +179,7 @@ public class SearchTFIDF {
     }
     
     public static void main(String[] args) {
-        String query="accessed 9-Mar-87";
+        String query="Analyst appeared";
         String[]arr=query.split(" ");
         String preprocessed="";
         for (String string : arr) {

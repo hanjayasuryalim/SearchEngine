@@ -85,6 +85,12 @@ public class SearchResultPanel extends javax.swing.JPanel {
         searchModeLabel = new javax.swing.JLabel();
         andModeButton = new javax.swing.JRadioButton();
         advModeButton = new javax.swing.JRadioButton();
+        outputNumberSpinner = new javax.swing.JSpinner();
+        resultAmountLabel = new javax.swing.JLabel();
+        searchModelLabel = new javax.swing.JLabel();
+        probabilisticModelButton = new javax.swing.JRadioButton();
+        languageModelButton = new javax.swing.JRadioButton();
+        jSeparator1 = new javax.swing.JSeparator();
 
         searchButton.setText("Search");
         searchButton.addActionListener(new java.awt.event.ActionListener() {
@@ -130,6 +136,14 @@ public class SearchResultPanel extends javax.swing.JPanel {
         modeButtonGroup.add(advModeButton);
         advModeButton.setText("Advanced Query");
 
+        resultAmountLabel.setText("Result Amount");
+
+        searchModelLabel.setText("Model");
+
+        probabilisticModelButton.setText("Probabilistic");
+
+        languageModelButton.setText("Language Model");
+
         orModeButton.setActionCommand("0");
         andModeButton.setActionCommand("1");
         advModeButton.setActionCommand("2");
@@ -140,22 +154,44 @@ public class SearchResultPanel extends javax.swing.JPanel {
             modeSelectPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(modeSelectPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(searchModeLabel)
+                .addGroup(modeSelectPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(searchModeLabel)
+                    .addComponent(resultAmountLabel)
+                    .addComponent(searchModelLabel))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(orModeButton)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(andModeButton)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(advModeButton)
-                .addContainerGap(253, Short.MAX_VALUE))
+                .addGroup(modeSelectPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(modeSelectPanelLayout.createSequentialGroup()
+                        .addComponent(probabilisticModelButton)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(languageModelButton))
+                    .addComponent(outputNumberSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(modeSelectPanelLayout.createSequentialGroup()
+                        .addComponent(orModeButton)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(andModeButton)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(advModeButton)))
+                .addContainerGap(239, Short.MAX_VALUE))
         );
         modeSelectPanelLayout.setVerticalGroup(
             modeSelectPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(modeSelectPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                .addComponent(orModeButton)
-                .addComponent(searchModeLabel)
-                .addComponent(andModeButton)
-                .addComponent(advModeButton))
+            .addGroup(modeSelectPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(modeSelectPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(searchModelLabel)
+                    .addComponent(probabilisticModelButton)
+                    .addComponent(languageModelButton))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(modeSelectPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(orModeButton)
+                    .addComponent(searchModeLabel)
+                    .addComponent(andModeButton)
+                    .addComponent(advModeButton))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(modeSelectPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(outputNumberSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(resultAmountLabel))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -167,11 +203,12 @@ public class SearchResultPanel extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(searchBarPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(modeSelectPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(searchBarSeparator)
+                    .addComponent(searchResultPane)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(responseLabel)
                         .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(searchResultPane))
+                    .addComponent(jSeparator1)
+                    .addComponent(searchBarSeparator))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -180,13 +217,15 @@ public class SearchResultPanel extends javax.swing.JPanel {
                 .addContainerGap()
                 .addComponent(searchBarPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(modeSelectPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(searchBarSeparator, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(responseLabel)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(searchResultPane, javax.swing.GroupLayout.DEFAULT_SIZE, 348, Short.MAX_VALUE)
+                .addComponent(searchResultPane, javax.swing.GroupLayout.DEFAULT_SIZE, 269, Short.MAX_VALUE)
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -204,14 +243,20 @@ public class SearchResultPanel extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JRadioButton advModeButton;
     private javax.swing.JRadioButton andModeButton;
+    private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JRadioButton languageModelButton;
     private javax.swing.ButtonGroup modeButtonGroup;
     private javax.swing.JPanel modeSelectPanel;
     private javax.swing.JRadioButton orModeButton;
+    private javax.swing.JSpinner outputNumberSpinner;
+    private javax.swing.JRadioButton probabilisticModelButton;
     private javax.swing.JLabel responseLabel;
+    private javax.swing.JLabel resultAmountLabel;
     private javax.swing.JPanel searchBarPanel;
     private javax.swing.JSeparator searchBarSeparator;
     private javax.swing.JButton searchButton;
     private javax.swing.JLabel searchModeLabel;
+    private javax.swing.JLabel searchModelLabel;
     private javax.swing.JScrollPane searchResultPane;
     private javax.swing.JTextField searchTextField;
     // End of variables declaration//GEN-END:variables

@@ -4,6 +4,8 @@
   <NonVisualComponents>
     <Component class="javax.swing.ButtonGroup" name="modeButtonGroup">
     </Component>
+    <Component class="javax.swing.ButtonGroup" name="modelButtonGroup">
+    </Component>
   </NonVisualComponents>
   <AuxValues>
     <AuxValue name="FormSettings_autoResourcing" type="java.lang.Integer" value="0"/>
@@ -55,7 +57,6 @@
                   <Component id="paddingPanel1" alignment="0" pref="468" max="32767" attributes="0"/>
                   <Component id="paddingPanel2" alignment="0" pref="468" max="32767" attributes="0"/>
                   <Group type="102" alignment="1" attributes="0">
-                      <EmptySpace max="32767" attributes="0"/>
                       <Component id="logoImageLabel" min="-2" pref="240" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
@@ -128,28 +129,53 @@
       <Layout>
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
-              <Group type="102" attributes="0">
+              <Group type="102" alignment="0" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="searchModeLabel" min="-2" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Component id="resultAmountLabel" alignment="0" min="-2" max="-2" attributes="0"/>
+                      <Component id="searchModeLabel" alignment="0" min="-2" max="-2" attributes="0"/>
+                      <Component id="searchModelLabel" alignment="0" min="-2" max="-2" attributes="0"/>
+                  </Group>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="orModeButton" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace max="-2" attributes="0"/>
-                  <Component id="andModeButton" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace max="-2" attributes="0"/>
-                  <Component id="advModeButton" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace pref="266" max="32767" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="102" alignment="0" attributes="0">
+                          <Component id="orModeButton" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="andModeButton" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="advModeButton" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <Group type="102" alignment="0" attributes="0">
+                          <Component id="probabilisticModelButton" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="languageModelButton" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <Component id="outputNumberSpinner" min="-2" pref="60" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace pref="252" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
         <DimensionLayout dim="1">
           <Group type="103" groupAlignment="0" attributes="0">
-              <Group type="102" alignment="1" attributes="0">
+              <Group type="102" alignment="0" attributes="0">
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="probabilisticModelButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="searchModelLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="languageModelButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="orModeButton" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="andModeButton" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="advModeButton" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="searchModeLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="outputNumberSpinner" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="resultAmountLabel" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="32767" attributes="0"/>
               </Group>
@@ -194,6 +220,49 @@
         <Component class="javax.swing.JLabel" name="searchModeLabel">
           <Properties>
             <Property name="text" type="java.lang.String" value="Search Mode"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JSpinner" name="outputNumberSpinner">
+          <Properties>
+            <Property name="model" type="javax.swing.SpinnerModel" editor="org.netbeans.modules.form.editors2.SpinnerModelEditor">
+              <SpinnerModel initial="10" minimum="10" numberType="java.lang.Integer" stepSize="10" type="number"/>
+            </Property>
+            <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+              <Dimension value="[41, 20]"/>
+            </Property>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JRadioButton" name="probabilisticModelButton">
+          <Properties>
+            <Property name="model" type="javax.swing.ButtonModel" editor="org.netbeans.modules.form.ComponentChooserEditor">
+              <ComponentRef name="default"/>
+            </Property>
+            <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+              <ComponentRef name="modelButtonGroup"/>
+            </Property>
+            <Property name="selected" type="boolean" value="true"/>
+            <Property name="text" type="java.lang.String" value="Probabilistic"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="searchModelLabel">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Model"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JRadioButton" name="languageModelButton">
+          <Properties>
+            <Property name="model" type="javax.swing.ButtonModel" editor="org.netbeans.modules.form.ComponentChooserEditor">
+              <ComponentRef name="default"/>
+            </Property>
+            <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+              <ComponentRef name="modelButtonGroup"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="Language Model"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="resultAmountLabel">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Result Amount"/>
           </Properties>
         </Component>
       </SubComponents>

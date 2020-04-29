@@ -25,12 +25,13 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="searchBarPanel" alignment="0" max="32767" attributes="0"/>
                   <Component id="modeSelectPanel" alignment="0" max="32767" attributes="0"/>
-                  <Component id="searchBarSeparator" alignment="0" max="32767" attributes="0"/>
-                  <Group type="102" alignment="0" attributes="0">
+                  <Component id="searchResultPane" alignment="0" max="32767" attributes="0"/>
+                  <Group type="102" attributes="0">
                       <Component id="responseLabel" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                   </Group>
-                  <Component id="searchResultPane" alignment="0" max="32767" attributes="0"/>
+                  <Component id="jSeparator1" max="32767" attributes="0"/>
+                  <Component id="searchBarSeparator" alignment="0" max="32767" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
@@ -42,13 +43,15 @@
               <EmptySpace max="-2" attributes="0"/>
               <Component id="searchBarPanel" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
+              <Component id="jSeparator1" min="-2" pref="10" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
               <Component id="modeSelectPanel" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="searchBarSeparator" min="-2" pref="10" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="responseLabel" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="searchResultPane" pref="348" max="32767" attributes="0"/>
+              <Component id="searchResultPane" pref="269" max="32767" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
@@ -117,26 +120,55 @@
       <Layout>
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
-              <Group type="102" alignment="0" attributes="0">
+              <Group type="102" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="searchModeLabel" min="-2" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Component id="searchModeLabel" min="-2" max="-2" attributes="0"/>
+                      <Component id="resultAmountLabel" alignment="0" min="-2" max="-2" attributes="0"/>
+                      <Component id="searchModelLabel" alignment="0" min="-2" max="-2" attributes="0"/>
+                  </Group>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="orModeButton" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace max="-2" attributes="0"/>
-                  <Component id="andModeButton" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace max="-2" attributes="0"/>
-                  <Component id="advModeButton" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace pref="253" max="32767" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="102" attributes="0">
+                          <Component id="probabilisticModelButton" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="languageModelButton" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <Component id="outputNumberSpinner" min="-2" pref="60" max="-2" attributes="0"/>
+                      <Group type="102" attributes="0">
+                          <Component id="orModeButton" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="andModeButton" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="advModeButton" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                  </Group>
+                  <EmptySpace pref="239" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
         <DimensionLayout dim="1">
           <Group type="103" groupAlignment="0" attributes="0">
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="orModeButton" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="searchModeLabel" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="andModeButton" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="advModeButton" alignment="3" min="-2" max="-2" attributes="0"/>
+              <Group type="102" alignment="0" attributes="0">
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="searchModelLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="probabilisticModelButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="languageModelButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="orModeButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="searchModeLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="andModeButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="advModeButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="outputNumberSpinner" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="resultAmountLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -180,7 +212,31 @@
             <AuxValue name="JavaCodeGenerator_AddingCodePre" type="java.lang.String" value="advModeButton.setActionCommand(&quot;2&quot;);"/>
           </AuxValues>
         </Component>
+        <Component class="javax.swing.JSpinner" name="outputNumberSpinner">
+        </Component>
+        <Component class="javax.swing.JLabel" name="resultAmountLabel">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Result Amount"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="searchModelLabel">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Model"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JRadioButton" name="probabilisticModelButton">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Probabilistic"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JRadioButton" name="languageModelButton">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Language Model"/>
+          </Properties>
+        </Component>
       </SubComponents>
     </Container>
+    <Component class="javax.swing.JSeparator" name="jSeparator1">
+    </Component>
   </SubComponents>
 </Form>
