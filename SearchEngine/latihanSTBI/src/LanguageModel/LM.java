@@ -18,7 +18,7 @@ public class LM{
     private HashMap<String, Integer> termTotalFrequency;
     private double lambda = 0.5;
     private ArrayList<Integer> rankedDocNo;
-    
+    private String [] cleanTokens;
     
     LM(String query){
         this.query = query;
@@ -112,10 +112,12 @@ public class LM{
             termFrequency.put(words[i], wordFreq);
             termTotalFrequency.put(words[i], total);
         }
+        this.cleanTokens = words;
     }
 
     //P(q|d) = 
-    public ArrayList<RankedItem> calculateProbability(String [] tokens){
+    public ArrayList<RankedItem> calculateProbability(){
+        String [] tokens = this.cleanTokens;
         ArrayList<RankedItem> rankedList = new ArrayList<>();
         ArrayList<Double> probs = new ArrayList<>();
         for (int i = 0; i < listDocsId.size(); i++) {
@@ -174,5 +176,6 @@ public class LM{
     
     public static void main(String[] args) {
         LM langModel = new LM("1991");
+        langModel.calculateProbability();
     }
 }
