@@ -103,7 +103,7 @@ public class MainPagePanel extends javax.swing.JPanel {
 
         modelButtonGroup.add(probabilisticModelButton);
         probabilisticModelButton.setSelected(true);
-        probabilisticModelButton.setText("Probabilistic");
+        probabilisticModelButton.setText("TF-IDF");
 
         searchModelLabel.setText("Model");
 
