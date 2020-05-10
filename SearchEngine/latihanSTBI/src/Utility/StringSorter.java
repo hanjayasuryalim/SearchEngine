@@ -24,10 +24,12 @@ public class StringSorter {
               }
            }
         }
+        /*
         for (int i = 0;  i<size-1; i++) {
             System.out.println(stringList.get(i));
             
         }
+        */
         return stringList;
     }
 }

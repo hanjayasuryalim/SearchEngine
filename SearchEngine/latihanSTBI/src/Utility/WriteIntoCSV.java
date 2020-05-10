@@ -38,7 +38,7 @@ public class WriteIntoCSV {
               
               WriteFile.writeData(data, target);
               data = "";
-              System.out.println("Row "+j+" Write Suceed");
+              //System.out.println("Row "+j+" Write Suceed");
             }
         }
     }
@@ -61,7 +61,7 @@ public class WriteIntoCSV {
               
               WriteFile.writeData(data, target);
               data = "";
-              System.out.println("Row "+j+" Write Suceed");
+              //System.out.println("Row "+j+" Write Suceed");
             }
         }
     }
@@ -88,7 +88,7 @@ public class WriteIntoCSV {
               
               WriteFile.writeData(data, target);
               data = "";
-              System.out.println("Row "+j+" Write Suceed");
+              //System.out.println("Row "+j+" Write Suceed");
             }
         }
     }

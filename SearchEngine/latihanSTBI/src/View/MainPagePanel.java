@@ -99,8 +99,7 @@ public class MainPagePanel extends javax.swing.JPanel {
 
         searchModeLabel.setText("Search Mode");
 
-        outputNumberSpinner.setModel(new javax.swing.SpinnerNumberModel(10, 10, null, 10));
-        outputNumberSpinner.setMinimumSize(new java.awt.Dimension(41, 20));
+        outputNumberSpinner.setModel(new javax.swing.SpinnerNumberModel(10, 10, null, 5));
 
         modelButtonGroup.add(probabilisticModelButton);
         probabilisticModelButton.setSelected(true);
@@ -116,6 +115,8 @@ public class MainPagePanel extends javax.swing.JPanel {
         advModeButton.setActionCommand("2");
         andModeButton.setActionCommand("1");
         orModeButton.setActionCommand("0");
+        probabilisticModelButton.setActionCommand("0");
+        languageModelButton.setActionCommand("1");
 
         javax.swing.GroupLayout modeSelectPanelLayout = new javax.swing.GroupLayout(modeSelectPanel);
         modeSelectPanel.setLayout(modeSelectPanelLayout);
@@ -214,7 +215,7 @@ public class MainPagePanel extends javax.swing.JPanel {
 
     private void searchButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchButtonActionPerformed
         JFrame parentFrame = (JFrame) SwingUtilities.getWindowAncestor(this);
-        SearchResultPanel resultPanel = new SearchResultPanel(searchTextField.getText(),Integer.parseInt(modeButtonGroup.getSelection().getActionCommand()));
+        SearchResultPanel resultPanel = new SearchResultPanel(searchTextField.getText(),Integer.parseInt(modeButtonGroup.getSelection().getActionCommand()),Integer.parseInt(modelButtonGroup.getSelection().getActionCommand()), Integer.parseInt(outputNumberSpinner.getValue().toString()));
         parentFrame.getContentPane().remove(this);
         parentFrame.setContentPane(resultPanel);
         parentFrame.repaint();

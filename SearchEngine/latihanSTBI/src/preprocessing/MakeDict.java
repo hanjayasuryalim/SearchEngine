@@ -30,12 +30,12 @@ public class MakeDict {
 
         for (int i = 0; i < keySort.size(); i++) {
             String key = keySort.get(i);
-            System.out.print(key + " : ");
+            //System.out.print(key + " : ");
 
             ArrayList<Integer> values = dict.get(key);
-            values.forEach((value) -> System.out.print(value + " "));
+            //values.forEach((value) -> System.out.print(value + " "));
 
-            System.out.println(" ");
+            //System.out.println(" ");
 
         }
     }
@@ -57,13 +57,13 @@ public class MakeDict {
                   data += String.valueOf(values.get(i)) + "\t";
               }
 
-              System.out.println(data);
+              //System.out.println(data);
 
               data +="\n";
 
               WriteFile.writeData(data, target);
               data = "";
-              System.out.println(" ");
+              //System.out.println(" ");
             }
         }
         data += "\n\n";
@@ -96,12 +96,12 @@ public class MakeDict {
                 Document doc = dBuilder.parse(f);
 
                 String date = (doc.getElementsByTagName("date").getLength() <= 0) ? "" : doc.getElementsByTagName("date").item(0).getTextContent();
-                System.out.println(date);
+                //System.out.println(date);
                 while(date.contains("  ")){
                     date = date.replace("  ", " ");
                 }
                 String [] arrDate = date.split(" ");
-                System.out.println(date);
+                //System.out.println(date);
                 for (String key : arrDate) {
                     if (dictDate.containsKey(key) && !"".equals(key)) {
                         if (!dictDate.get(key).contains(i)) {
@@ -157,14 +157,14 @@ public class MakeDict {
             }
         }
             String data ="";
-            System.out.println("Dictionary of Date : ");
+            //System.out.println("Dictionary of Date : ");
             csvDict(dictDate, "Date","XML/AfterDate.tsv");
 
 
-            System.out.println("Dictionary of Title : ");
+            //System.out.println("Dictionary of Title : ");
             csvDict(dictTitle, "Title","XML/AfterTitle.tsv");
 
-            System.out.println("Dictionary of Body : ");
+            //System.out.println("Dictionary of Body : ");
             csvDict(dictBody, "Body","XML/AfterBody.tsv");
 
 

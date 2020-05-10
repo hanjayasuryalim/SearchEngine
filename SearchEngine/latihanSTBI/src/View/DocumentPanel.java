@@ -4,7 +4,10 @@
  * and open the template in the editor.
  */
 package View;
+import LanguageModel.RankedItem;
 import Model.XMLDoc;
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
 /**
@@ -13,20 +16,26 @@ import javax.swing.SwingUtilities;
  */
 public class DocumentPanel extends javax.swing.JPanel {
 
-    private int docNumber, mode;
+    private int docNumber, mode, model, resultAmount;
+    private double docScore;
     private String lastQuery;
     /**
      * Creates new form DocumentPanel
      */
-    public DocumentPanel(int targetDoc, String lastQuery, int mode) {
-        this.docNumber = targetDoc;
+    public DocumentPanel(RankedItem targetDoc, String lastQuery, int mode, int model, int resultAmount) {
+        NumberFormat f = new DecimalFormat("#0.000000");
+        this.docNumber = targetDoc.docId;
+        this.docScore = targetDoc.score;
         this.lastQuery = lastQuery;
         this.mode = mode;
+        this.model = model;
+        this.resultAmount = resultAmount;
         initComponents();
-        XMLDoc doc = new XMLDoc(targetDoc);
+        XMLDoc doc = new XMLDoc(docNumber);
         documentTitleLabel.setText(doc.getTitle());
         documentBodyTextArea.setText(doc.getBody());
         documentDateLabel.setText("Date : " + doc.getDate());
+        scoreLabel.setText("Score : " + f.format(docScore));
     }
 
     /**
@@ -110,7 +119,7 @@ public class DocumentPanel extends javax.swing.JPanel {
 
     private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButtonActionPerformed
         JFrame parentFrame = (JFrame) SwingUtilities.getWindowAncestor(this);
-        SearchResultPanel resultPanel = new SearchResultPanel(lastQuery,mode);
+        SearchResultPanel resultPanel = new SearchResultPanel(lastQuery,mode,model,resultAmount);
         parentFrame.getContentPane().remove(this);
         parentFrame.setContentPane(resultPanel);
         parentFrame.repaint();

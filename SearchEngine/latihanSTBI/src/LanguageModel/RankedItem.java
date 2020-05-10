@@ -24,4 +24,22 @@ public class RankedItem implements Comparable {
             return 0;
         }
     }
+
+    public int getDocId() {
+        return docId;
+    }
+
+    public void setDocId(int docId) {
+        this.docId = docId;
+    }
+
+    public double getScore() {
+        return score;
+    }
+
+    public void setScore(double score) {
+        this.score = score;
+    }
+    
+    
 }

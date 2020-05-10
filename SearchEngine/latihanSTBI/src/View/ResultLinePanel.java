@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package View;
+import LanguageModel.RankedItem;
 import Model.XMLDoc;
 import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
@@ -13,17 +14,21 @@ import javax.swing.SwingUtilities;
  */
 public class ResultLinePanel extends javax.swing.JPanel {
 
-    int docNumber, mode;
+    RankedItem targetDoc;
+    int docNumber, mode, model, resultAmount;
     String lastQuery;
     /**
      * Creates new form ResultLinePanel
      */
-    public ResultLinePanel(int targetDoc, String lastQuery, int mode) {
-        this.docNumber = targetDoc;
+    public ResultLinePanel(RankedItem targetDoc, String lastQuery, int mode, int model, int resultAmount) {
+        this.targetDoc = targetDoc;
+        this.docNumber = targetDoc.docId;
         this.lastQuery = lastQuery;
         this.mode = mode;
+        this.model = model;
+        this.resultAmount = resultAmount;
         initComponents();
-        XMLDoc doc = new XMLDoc(targetDoc);
+        XMLDoc doc = new XMLDoc(docNumber);
         titleLabel.setText(doc.getTitle());
         dateLabel.setText(doc.getDate());
         try{
@@ -35,7 +40,7 @@ public class ResultLinePanel extends javax.swing.JPanel {
             bodyTextArea.setText(bodyPreview);
         } catch(Exception e) {
             bodyTextArea.setText("");
-            System.out.println("Document empty. Check DatabseXML folder.");
+            //System.out.println("Document empty. Check DatabseXML folder.");
             System.out.println(e);
         }
     }
@@ -100,7 +105,7 @@ public class ResultLinePanel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void bodyTextAreaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bodyTextAreaMouseClicked
-        DocumentPanel docPanel = new DocumentPanel(docNumber,lastQuery,mode);
+        DocumentPanel docPanel = new DocumentPanel(targetDoc,lastQuery,mode,model,resultAmount);
         JFrame parentFrame = (JFrame) SwingUtilities.getWindowAncestor(this);
         parentFrame.getContentPane().remove(this);
         parentFrame.setContentPane(docPanel);

@@ -225,24 +225,21 @@
         <Component class="javax.swing.JSpinner" name="outputNumberSpinner">
           <Properties>
             <Property name="model" type="javax.swing.SpinnerModel" editor="org.netbeans.modules.form.editors2.SpinnerModelEditor">
-              <SpinnerModel initial="10" minimum="10" numberType="java.lang.Integer" stepSize="10" type="number"/>
-            </Property>
-            <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-              <Dimension value="[41, 20]"/>
+              <SpinnerModel initial="10" minimum="10" numberType="java.lang.Integer" stepSize="5" type="number"/>
             </Property>
           </Properties>
         </Component>
         <Component class="javax.swing.JRadioButton" name="probabilisticModelButton">
           <Properties>
-            <Property name="model" type="javax.swing.ButtonModel" editor="org.netbeans.modules.form.ComponentChooserEditor">
-              <ComponentRef name="default"/>
-            </Property>
             <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
               <ComponentRef name="modelButtonGroup"/>
             </Property>
             <Property name="selected" type="boolean" value="true"/>
             <Property name="text" type="java.lang.String" value="Probabilistic"/>
           </Properties>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_AddingCodePre" type="java.lang.String" value="probabilisticModelButton.setActionCommand(&quot;0&quot;);"/>
+          </AuxValues>
         </Component>
         <Component class="javax.swing.JLabel" name="searchModelLabel">
           <Properties>
@@ -251,14 +248,14 @@
         </Component>
         <Component class="javax.swing.JRadioButton" name="languageModelButton">
           <Properties>
-            <Property name="model" type="javax.swing.ButtonModel" editor="org.netbeans.modules.form.ComponentChooserEditor">
-              <ComponentRef name="default"/>
-            </Property>
             <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
               <ComponentRef name="modelButtonGroup"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Language Model"/>
           </Properties>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_AddingCodePre" type="java.lang.String" value="languageModelButton.setActionCommand(&quot;1&quot;);"/>
+          </AuxValues>
         </Component>
         <Component class="javax.swing.JLabel" name="resultAmountLabel">
           <Properties>

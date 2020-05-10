@@ -4,6 +4,8 @@
  * and open the template in the editor.
  */
 package View;
+import LanguageModel.LM;
+import LanguageModel.RankedItem;
 import Search.*;
 import java.awt.Container;
 import java.awt.GridLayout;
@@ -22,9 +24,10 @@ public class SearchResultPanel extends javax.swing.JPanel {
     /**
      * Creates new form SearchResultPanel
      */
-    public SearchResultPanel(String searchQuery, int mode) {
+    public SearchResultPanel(String searchQuery, int mode, int model, int resultAmount) {
         initComponents();
         searchTextField.setText(searchQuery);
+        outputNumberSpinner.setValue(resultAmount);
         switch(mode){
             case 0 : {
                 modeButtonGroup.setSelected(orModeButton.getModel(), true);
@@ -43,25 +46,84 @@ public class SearchResultPanel extends javax.swing.JPanel {
                 break;
             }
         }
-        Search s = new Search();
-        ArrayList<String> searchResult = s.search(searchQuery,mode);
-        int resultCount = searchResult.size();
-        Container resultContainer = new Container();
-        resultContainer.setLayout(new GridLayout(0,1));
-        for(String docNumber : searchResult) {
-            ResultLinePanel searchResultPanel = new ResultLinePanel(Integer.parseInt(docNumber),searchQuery,mode);
-            resultContainer.add(searchResultPanel);
-        }
-        long timeElapsed = s.getTimeElapsed();
-        NumberFormat f = new DecimalFormat("#0.00");
-        responseLabel.setText("Showing " + resultCount + " results (" + f.format(timeElapsed/(double)1000000000) + " seconds)");
-        javax.swing.SwingUtilities.invokeLater(new Runnable() {
-            public void run() { 
-                searchResultPane.getVerticalScrollBar().setValue(0);
-                searchResultPane.getVerticalScrollBar().setUnitIncrement(20);
+        switch(model){
+            case 0 : {
+                modelButtonGroup.setSelected(probabilisticModelButton.getModel(), true);
+                Search s = new Search();
+                ArrayList<String> searchResult = s.search(searchQuery,mode);
+                ArrayList<String> resultList = new ArrayList<String>();
+                if(searchResult.size() > resultAmount) {
+                    for(int i = 0; i < resultAmount; i++){
+                        resultList.add(searchResult.get(i));
+                    }
+                } else {
+                    resultList = searchResult;
+                }
+                int resultCount = resultList.size();
+                Container resultContainer = new Container();
+                resultContainer.setLayout(new GridLayout(0,1));
+                for(String docNumber : resultList) {
+                    RankedItem tempItem = new RankedItem();
+                    tempItem.setDocId(Integer.parseInt(docNumber));
+                    tempItem.setScore(0);
+                    ResultLinePanel searchResultPanel = new ResultLinePanel(tempItem,searchQuery,mode,model,resultAmount);
+                    resultContainer.add(searchResultPanel);
+                }
+                long timeElapsed = s.getTimeElapsed();
+                NumberFormat f = new DecimalFormat("#0.00");
+                responseLabel.setText("Showing " + resultCount + " results (" + f.format(timeElapsed/(double)1000000000) + " seconds)");
+                javax.swing.SwingUtilities.invokeLater(new Runnable() {
+                    public void run() { 
+                        searchResultPane.getVerticalScrollBar().setValue(0);
+                        searchResultPane.getVerticalScrollBar().setUnitIncrement(20);
+                    }
+                 });
+                searchResultPane.getViewport().setView(resultContainer);
+                break;
             }
-         });
-        searchResultPane.getViewport().setView(resultContainer);
+            case 1 : {
+                modelButtonGroup.setSelected(languageModelButton.getModel(),true);
+                Search s = new Search();
+                LM searchModel = new LM(searchQuery);
+                ArrayList<String> searchResult = s.search(searchQuery,mode);
+                ArrayList<RankedItem> resultList = new ArrayList<RankedItem>();
+                ArrayList<RankedItem> languageResult = searchModel.calculateProbability();
+                
+                if(languageResult.size() > resultAmount){
+                    for(int i = 0; i < resultAmount; i++){
+                        resultList.add(languageResult.get(i));
+                    }
+                } else {
+                    for(int i = 0; i < languageResult.size(); i++){
+                        resultList.add(languageResult.get(i));
+                    }
+                }
+                
+                int resultCount = resultList.size();
+                Container resultContainer = new Container();
+                resultContainer.setLayout(new GridLayout(0,1));
+                for(RankedItem targetDoc : resultList) {
+                    ResultLinePanel searchResultPanel = new ResultLinePanel(targetDoc,searchQuery,mode,model,resultAmount);
+                    resultContainer.add(searchResultPanel);
+                }
+                long timeElapsed = searchModel.getTimeElapsed();
+                NumberFormat f = new DecimalFormat("#0.00");
+                responseLabel.setText("Showing " + resultCount + " results (" + f.format(timeElapsed/(double)1000000000) + " seconds)");
+                javax.swing.SwingUtilities.invokeLater(new Runnable() {
+                    public void run() { 
+                        searchResultPane.getVerticalScrollBar().setValue(0);
+                        searchResultPane.getVerticalScrollBar().setUnitIncrement(20);
+                    }
+                 });
+                searchResultPane.getViewport().setView(resultContainer);
+                break;
+            }
+            default : {
+                
+                break;
+            }
+        }
+        
     }
 
     /**
@@ -74,6 +136,7 @@ public class SearchResultPanel extends javax.swing.JPanel {
     private void initComponents() {
 
         modeButtonGroup = new javax.swing.ButtonGroup();
+        modelButtonGroup = new javax.swing.ButtonGroup();
         searchBarPanel = new javax.swing.JPanel();
         searchButton = new javax.swing.JButton();
         searchTextField = new javax.swing.JTextField();
@@ -136,17 +199,23 @@ public class SearchResultPanel extends javax.swing.JPanel {
         modeButtonGroup.add(advModeButton);
         advModeButton.setText("Advanced Query");
 
+        outputNumberSpinner.setModel(new javax.swing.SpinnerNumberModel(10, 10, null, 5));
+
         resultAmountLabel.setText("Result Amount");
 
         searchModelLabel.setText("Model");
 
+        modelButtonGroup.add(probabilisticModelButton);
         probabilisticModelButton.setText("Probabilistic");
 
+        modelButtonGroup.add(languageModelButton);
         languageModelButton.setText("Language Model");
 
         orModeButton.setActionCommand("0");
         andModeButton.setActionCommand("1");
         advModeButton.setActionCommand("2");
+        probabilisticModelButton.setActionCommand("0");
+        languageModelButton.setActionCommand("1");
 
         javax.swing.GroupLayout modeSelectPanelLayout = new javax.swing.GroupLayout(modeSelectPanel);
         modeSelectPanel.setLayout(modeSelectPanelLayout);
@@ -232,7 +301,7 @@ public class SearchResultPanel extends javax.swing.JPanel {
 
     private void searchButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchButtonActionPerformed
         JFrame parentFrame = (JFrame) SwingUtilities.getWindowAncestor(this);
-        SearchResultPanel resultPanel = new SearchResultPanel(searchTextField.getText(),Integer.parseInt(modeButtonGroup.getSelection().getActionCommand()));
+        SearchResultPanel resultPanel = new SearchResultPanel(searchTextField.getText(),Integer.parseInt(modeButtonGroup.getSelection().getActionCommand()),Integer.parseInt(modelButtonGroup.getSelection().getActionCommand()), Integer.parseInt(outputNumberSpinner.getValue().toString()));
         parentFrame.getContentPane().remove(this);
         parentFrame.setContentPane(resultPanel);
         parentFrame.repaint();
@@ -247,6 +316,7 @@ public class SearchResultPanel extends javax.swing.JPanel {
     private javax.swing.JRadioButton languageModelButton;
     private javax.swing.ButtonGroup modeButtonGroup;
     private javax.swing.JPanel modeSelectPanel;
+    private javax.swing.ButtonGroup modelButtonGroup;
     private javax.swing.JRadioButton orModeButton;
     private javax.swing.JSpinner outputNumberSpinner;
     private javax.swing.JRadioButton probabilisticModelButton;

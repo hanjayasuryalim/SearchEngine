@@ -54,12 +54,12 @@ public class Frequency {
 
                 String date = (doc.getElementsByTagName("date").getLength() <= 0) ? ""
                         : doc.getElementsByTagName("date").item(0).getTextContent();
-                System.out.println(date);
+                //System.out.println(date);
                 while (date.contains("  ")) {
                     date = date.replace("  ", " ");
                 }
                 String[] arrDate = date.split(" ");
-                System.out.println(date);
+                //System.out.println(date);
                 dateCount.add(arrDate.length);
 
                 String title = (doc.getElementsByTagName("title").getLength() <= 0) ? ""
@@ -121,13 +121,13 @@ public class Frequency {
         getFrequencyFromDocuments();
 
         //Saving the frequency
-        System.out.println("Frequency of Date : ");
+        //System.out.println("Frequency of Date : ");
         csvDict(dictDate, "Date", "XML/FrequencyDate.csv");
 
-        System.out.println("Frequency of Title : ");
+        //System.out.println("Frequency of Title : ");
         csvDict(dictTitle, "Title", "XML/FrequencyTitle.csv");
 
-        System.out.println("Frequency of Body : ");
+        //System.out.println("Frequency of Body : ");
         csvDict(dictBody, "Body", "XML/FrequencyBody.csv");
     }
 
@@ -151,12 +151,12 @@ public class Frequency {
 
                 String date = (doc.getElementsByTagName("date").getLength() <= 0) ? ""
                         : doc.getElementsByTagName("date").item(0).getTextContent();
-                System.out.println(date);
+                //System.out.println(date);
                 while (date.contains("  ")) {
                     date = date.replace("  ", " ");
                 }
                 String[] arrDate = date.split(" ");
-                System.out.println(date);
+                //System.out.println(date);
                 for (String key : arrDate) {
                     if (!" ".equals(key) && !termDate.contains(key)) {
                         termDate.add(key);
@@ -239,13 +239,13 @@ public class Frequency {
                 Document doc = dBuilder.parse(f);
 
                 String date = (doc.getElementsByTagName("date").getLength() <= 0) ? "" : doc.getElementsByTagName("date").item(0).getTextContent();
-                System.out.println(date);
+                //System.out.println(date);
                 while (date.contains("  ")) {
                     date = date.replace("  ", " ");
                 }
 
                 List<String> arrDate = Arrays.asList(date.split(" "));
-                System.out.println(date);
+                //System.out.println(date);
                 for (String key : termDate) {
                     if (arrDate.contains(key)) {
                         int noDoc = i;
@@ -323,11 +323,11 @@ public class Frequency {
                 data = data.substring(0, data.length() - 2);
                 data += "]\n";
 
-                System.out.println(data);
+                //System.out.println(data);
 
                 WriteFile.writeData(data, target);
                 data = "";
-                System.out.println(" ");
+                //System.out.println(" ");
             }
         }
         data += "\n\n";
@@ -374,15 +374,15 @@ public class Frequency {
         ArrayList<String> queryTerms = getAllTermsInQuery(query);
 
         //Initialize HashMap
-        System.out.println("Query Frequency : ");
+        //System.out.println("Query Frequency : ");
         for (String term : queryTerms) {
             int frequency = getTermsFrequency(term, query);
             NoDocValue value = new NoDocValue(0, Double.valueOf(frequency));
             queryFrequency.put(term, value);
             
-            System.out.println("Term : " + term + " - " + frequency);
+            //System.out.println("Term : " + term + " - " + frequency);
         }
-        System.out.println("\n\n");
+        //System.out.println("\n\n");
 
         return queryFrequency;
     }

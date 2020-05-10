@@ -52,7 +52,7 @@ public class Regex {
                     matcher = SubContentPattern.matcher(token);
                     if (matcher.find()) {
                         arrIsToken[i] = true; 
-                        System.out.println("Date : ");
+                        //System.out.println("Date : ");
                     } else {
                         SubContentPattern = Pattern.compile(timeExp[0]);
                         matcher = SubContentPattern.matcher(token);
@@ -86,9 +86,11 @@ public class Regex {
                     }
                 }
             }
+            /*
             if (arrIsToken[i]){
                 System.out.println("Regex : " + tokens[i]);
             }
+            */
         }
 
         return arrIsToken;
