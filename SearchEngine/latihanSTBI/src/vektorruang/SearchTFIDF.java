@@ -55,7 +55,7 @@ public class SearchTFIDF {
         //Getting query frequency
         HashMap<String, NoDocValue> queryFrequency = Frequency.getQueryFrequency(query);
         
-        System.out.println("Document weight, weight ^ 2");
+        //System.out.println("Document weight, weight ^ 2");
         for (String term : arrQuery) {
             //Get frequency and idf
             double frequency = queryFrequency.get(term).getValue();
@@ -75,15 +75,15 @@ public class SearchTFIDF {
                 fillArrDocWeight(dictWeight.get(term), queryWeight.getValue());
             }
         }
-        System.out.println("\n\n");
+        //System.out.println("\n\n");
         
         //Iterate through arrDocWeight to get |dj|
-        System.out.println("Document |dj| : ");
+        //System.out.println("Document |dj| : ");
         for (int noDoc : relatedNoDoc) {
             arrDocWeight.get(noDoc).add(2, squareRootDouble(arrDocWeight.get(noDoc).get(1)));
-            System.out.println("No Doc: " + noDoc + " - " + arrDocWeight.get(noDoc).get(2)+" -- "+arrDocWeight.get(noDoc).get(0)+" -- ");          
+            //System.out.println("No Doc: " + noDoc + " - " + arrDocWeight.get(noDoc).get(2)+" -- "+arrDocWeight.get(noDoc).get(0)+" -- ");          
         }
-        System.out.println("\n\n");
+        //System.out.println("\n\n");
         
         //Iterate to get similarity of document j and query ( sim(dj,q) )
         for (int noDoc : relatedNoDoc) {
@@ -151,8 +151,8 @@ public class SearchTFIDF {
     private static ArrayList<Integer> printRanking() {
         ArrayList<Integer> listRanking = new ArrayList<>();
         
-        System.out.println("Ranking : ");
-        System.out.println("-------------------------------------------------");
+        //System.out.println("Ranking : ");
+        //System.out.println("-------------------------------------------------");
         for (int i = 0; i < keySetOfArrSim.size(); i++) {
             String documents = "";
             for (int noDoc : arrSim.get( keySetOfArrSim.get(i) )) {
@@ -164,7 +164,7 @@ public class SearchTFIDF {
                 }
             }
             
-            System.out.println("No. " + (i+1) + " : " + documents.substring(0, documents.length()-2) + " with similarity = " + keySetOfArrSim.get(i));
+            //System.out.println("No. " + (i+1) + " : " + documents.substring(0, documents.length()-2) + " with similarity = " + keySetOfArrSim.get(i));
         }
         
         return listRanking;
@@ -189,16 +189,16 @@ public class SearchTFIDF {
         SearchTFIDF.getRanking(preprocessed, "Body");
         SearchTFIDF.getRanking(preprocessed, "Title");
         SearchTFIDF.getRanking(preprocessed, "Date");
-        System.out.println("\n\n\n");
+        //System.out.println("\n\n\n");
         for (Integer rank : TotalListRanking) {
-            System.out.println(rank);
+            //System.out.println(rank);
         }
         
         return TotalListRanking;
     }
     
     public static void main(String[] args) {
-        String query="accessed 9-Mar-87";
+        String query="Analyst appeared";
         String[]arr=query.split(" ");
         String preprocessed="";
         for (String string : arr) {
@@ -209,9 +209,9 @@ public class SearchTFIDF {
         SearchTFIDF.getRanking(preprocessed, "Body");
         SearchTFIDF.getRanking(preprocessed, "Title");
         SearchTFIDF.getRanking(preprocessed, "Date");
-        System.out.println("\n\n\n");
+        //System.out.println("\n\n\n");
         for (Integer rank : TotalListRanking) {
-            System.out.println(rank);
+            //System.out.println(rank);
         }
     }
 }

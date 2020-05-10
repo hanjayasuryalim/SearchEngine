@@ -72,10 +72,9 @@ public class Search {
         }
         
         for (String string : returnTest) {
-            System.out.print(string + ",");
+            //System.out.print(string + ",");
         }
         endTime = System.nanoTime();
-        timeElapsed = endTime-startTime;
         return returnTest;
     }
     
@@ -90,7 +89,7 @@ public class Search {
             if (queryPart[i].equals("&&") || queryPart[i].equals("||") || queryPart[i].equals("(") || queryPart[i].equals(")") || queryPart[i].equals("~") ){
                 queries.add(queryPart[i]);            
             }else{
-                System.out.println("Query Part = " + queryPart[i]);
+                //System.out.println("Query Part = " + queryPart[i]);
                 queries.add(getList(queryPart[i]));
             }
             
@@ -117,9 +116,9 @@ public class Search {
     }
 
     public static ArrayList<Integer> getList(String word) {
-        System.out.println("Word : "+word);
+        //System.out.println("Word : "+word);
         word = PreProcess.singleWordPreprocess(word);
-        System.out.println("Word : "+word);
+        //System.out.println("Word : "+word);
         ArrayList<Integer> myList = new ArrayList<>();
         if (word.equals("")){
             for (int i = 1; i <= 500; i++) {
@@ -144,11 +143,13 @@ public class Search {
             }
 
             //test leven title
-            System.out.println("LEVENSTHEIN TITLE");
+            //System.out.println("LEVENSTHEIN TITLE");
+            /*
             for (String string : titleValidWordList) {
                 System.out.println(string);
             }
-            System.out.println("==========================================\n\n\n\n");
+            */
+            //System.out.println("==========================================\n\n\n\n");
             //end test
 
             for (String string : titleValidWordList) {
@@ -170,11 +171,13 @@ public class Search {
             }
 
             //test leven title
-            System.out.println("LEVENSTHEIN BODY");
+            //System.out.println("LEVENSTHEIN BODY");
+            /*
             for (String string : bodyValidWordList) {
                 System.out.println(string);
             }
-            System.out.println("==========================================\n\n\n\n");
+            */
+            //System.out.println("==========================================\n\n\n\n");
             //end test
 
             for (String string : bodyValidWordList) {
@@ -207,6 +210,7 @@ public class Search {
     }
     
     public long getTimeElapsed(){
+        timeElapsed = endTime-startTime;
         return timeElapsed;
     }
 
@@ -263,7 +267,7 @@ public class Search {
                 String symbol = (String) stack.get(i);
                 if (symbol.equals("~")){  
                     stack.remove(i);
-                    System.out.println("abcde");
+                    //System.out.println("abcde");
                     ArrayList<Integer> result = notOperation(stack.get(i-1)); 
                     stack.set(i-1,  result);
                     i=0;

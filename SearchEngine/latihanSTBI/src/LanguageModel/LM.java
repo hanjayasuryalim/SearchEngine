@@ -19,14 +19,17 @@ public class LM{
     private double lambda = 0.5;
     private ArrayList<Integer> rankedDocNo;
     private String [] cleanTokens;
+    public static long startTime, endTime, timeElapsed;
     
-    LM(String query){
+    public LM(String query){
+        // START
+        startTime = System.nanoTime();
         this.query = query;
         
         
         //Search query dengan mode OR
         ArrayList<String> listDocs = Search.search(query, 0);
-        System.out.println("Founded = " + listDocs.size());
+        //System.out.println("Founded = " + listDocs.size());
         listDocsId = new ArrayList<>();
         listDocs.forEach(docName -> listDocsId.add(Integer.valueOf(docName)));
         
@@ -39,7 +42,7 @@ public class LM{
         
         
         
-        System.out.println("");
+        //System.out.println("");
         
         
         // Menyimpan nilai total word dan jumlah word per dokumen yang ditemukan
@@ -52,9 +55,9 @@ public class LM{
             temp += Integer.valueOf(titleCount[index]);
             totalWord += temp;
             totalWordPerDoc.add(temp);
-            System.out.print(String.valueOf(temp) + ","); 
+            //System.out.print(String.valueOf(temp) + ","); 
         }
-        System.out.println("");
+        //System.out.println("");
         
         HashMap<String,ArrayList<Integer>> hmDate = new HashMap<>();
         HashMap<String,ArrayList<Integer>> hmTitle = new HashMap<>();
@@ -87,7 +90,7 @@ public class LM{
             ArrayList<Integer> fullFreqDate = hmDate.get(words[i]);
             ArrayList<Integer> fullFreqTitle = hmTitle.get(words[i]);
             
-            System.out.println(words[i]);
+            //System.out.println(words[i]);
             
             ArrayList<Integer> wordFreq = new ArrayList<>();
             
@@ -141,16 +144,16 @@ public class LM{
             rankedList.add(tempRankedItem);
             
             probs.add(probability);
-            System.out.println(String.valueOf(probability));
+            //System.out.println(String.valueOf(probability));
         }
         
         Collections.sort(rankedList);        
         
-        System.out.println("RANKING : ");
-        System.out.println("Total Item = " + String.valueOf(rankedList.size()));
+        //System.out.println("RANKING : ");
+        //System.out.println("Total Item = " + String.valueOf(rankedList.size()));
         for (int i = 0; i < rankedList.size(); i++) {
             String a = String.valueOf(rankedList.get(i).score) + " => " + String.valueOf(rankedList.get(i).docId);
-            System.out.println(a);
+            //System.out.println(a);
         }
         /*
         rankedDocNo = new ArrayList<>();
@@ -169,10 +172,15 @@ public class LM{
             probs.set(index , 0.0);
         }
         */
+        // END
+        endTime = System.nanoTime();
         return rankedList;
     }
     
-    
+    public long getTimeElapsed(){
+        timeElapsed = endTime - startTime;
+        return timeElapsed;
+    }
     
     public static void main(String[] args) {
         LM langModel = new LM("1991");

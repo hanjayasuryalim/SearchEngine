@@ -23,8 +23,8 @@ public class SymbolRemover {
         }
         
         if ((token.contains(">")||token.contains("&lt;") || token.contains("/")) && !token.toLowerCase().contains("date") && !token.toLowerCase().contains("body") && !token.toLowerCase().contains("title")  ){
-            System.out.println("Masuk sini");
-            System.out.println(token);
+            //System.out.println("Masuk sini");
+            //System.out.println(token);
             token = token.replace("<", " ");
             token = token.replace("&lt;"," ");
             token = token.replace(">"," ");

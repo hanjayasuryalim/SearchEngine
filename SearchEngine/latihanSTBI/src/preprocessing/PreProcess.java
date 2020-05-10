@@ -58,7 +58,7 @@ public class PreProcess {
                         String dateExp[] = {"^(?:\\d{4}|\\d{1,2})[-/.](?:\\d{1,2}|J(anuary|an|AN|une|un|UN|uly|ul|UL)|F(ebruary|eb|EB)|M(arch|ar|AR|ay|AY)|A(pril|pr|PR|ugust|ug|UG)|S(eptember|ep|EP)|O(ctober|ct|CT)|N(ovember|ov|OV)|D(ecember|ec|EC))[-/.](?:\\d{4}|\\d{1,2})$"};
                         Pattern SubContentPattern = Pattern.compile(dateExp[0]);
                         Matcher matcher = SubContentPattern.matcher(tokens[k]);
-                        System.out.println("_______________DATE ??? _____________");
+                        //System.out.println("_______________DATE ??? _____________");
                         if (matcher.find()) {
                             tokens[k] = normalizeDate(tokens[k]).toLowerCase();
                         }else{
@@ -120,7 +120,7 @@ public class PreProcess {
                     String dateExp[] = {"^(?:\\d{4}|\\d{1,2})[-/.](?:\\d{1,2}|J(anuary|an|AN|une|un|UN|uly|ul|UL)|F(ebruary|eb|EB)|M(arch|ar|AR|ay|AY)|A(pril|pr|PR|ugust|ug|UG)|S(eptember|ep|EP)|O(ctober|ct|CT)|N(ovember|ov|OV)|D(ecember|ec|EC))[-/.](?:\\d{4}|\\d{1,2})$"};
                     Pattern SubContentPattern = Pattern.compile(dateExp[0]);
                     Matcher matcher = SubContentPattern.matcher(tokens[k]);
-                    System.out.println("_______________DATE ??? _____________");
+                    //System.out.println("_______________DATE ??? _____________");
                     if (matcher.find()) {
                         tokens[k] = normalizeDate(tokens[k]).toLowerCase();
                     }else{
