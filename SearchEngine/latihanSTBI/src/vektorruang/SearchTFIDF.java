@@ -178,6 +178,25 @@ public class SearchTFIDF {
         return (weight * weight);
     }
     
+    public static ArrayList<Integer> getTFIDFRanking(String query) {
+        String[] arr = query.split(" ");
+        String preprocessed = "";
+        for (String string : arr) {
+            preprocessed += preprocessing.PreProcess.singleWordPreprocess(string)+" ";
+        }
+        preprocessed = preprocessed.substring(0,preprocessed.length()-1);
+
+        SearchTFIDF.getRanking(preprocessed, "Body");
+        SearchTFIDF.getRanking(preprocessed, "Title");
+        SearchTFIDF.getRanking(preprocessed, "Date");
+        System.out.println("\n\n\n");
+        for (Integer rank : TotalListRanking) {
+            System.out.println(rank);
+        }
+        
+        return TotalListRanking;
+    }
+    
     public static void main(String[] args) {
         String query="Analyst appeared";
         String[]arr=query.split(" ");
@@ -185,8 +204,8 @@ public class SearchTFIDF {
         for (String string : arr) {
             preprocessed += preprocessing.PreProcess.singleWordPreprocess(string)+" ";
         }
-       preprocessed = preprocessed.substring(0,preprocessed.length()-1);
-        
+        preprocessed = preprocessed.substring(0,preprocessed.length()-1);
+
         SearchTFIDF.getRanking(preprocessed, "Body");
         SearchTFIDF.getRanking(preprocessed, "Title");
         SearchTFIDF.getRanking(preprocessed, "Date");
