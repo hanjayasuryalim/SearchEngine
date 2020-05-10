@@ -32,7 +32,7 @@ public class DocumentPanel extends javax.swing.JPanel {
         this.resultAmount = resultAmount;
         initComponents();
         XMLDoc doc = new XMLDoc(docNumber);
-        documentTitleLabel.setText(doc.getTitle());
+        documentTitleLabel.setText("["+docNumber+"] "+doc.getTitle());
         documentBodyTextArea.setText(doc.getBody());
         documentDateLabel.setText("Date : " + doc.getDate());
         scoreLabel.setText("Score : " + f.format(docScore));
