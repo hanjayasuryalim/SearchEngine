@@ -1,5 +1,6 @@
 package vektorruang;
 
+import LanguageModel.RankedItem;
 import Model.NoDocValue;
 import Utility.ReadCSV;
 import java.util.ArrayList;
@@ -8,7 +9,8 @@ import java.util.HashMap;
 
 public class SearchTFIDF {
     //variable to combine all ranking
-    private static ArrayList<Integer>TotalListRanking = new ArrayList<>();
+    private static ArrayList<RankedItem> TotalListRanking = new ArrayList<>();
+    private static ArrayList<Integer> noDocumentInRanking = new ArrayList<>();
     //Path untuk ke CSV Weight
     private static final String PATHWEIGHTTITLE = "XML/WeightTitle.csv";
     private static final String PATHWEIGHTBODY = "XML/WeightBody.csv";
@@ -159,8 +161,14 @@ public class SearchTFIDF {
                 if (!listRanking.contains(noDoc)) {
                     documents += noDoc + ", ";
                 }
-                if(!TotalListRanking.contains(noDoc)){
-                    TotalListRanking.add(noDoc);
+                if(!noDocumentInRanking.contains(noDoc)){
+                    noDocumentInRanking.add(noDoc);
+                    
+                    RankedItem newItem = new RankedItem();
+                    newItem.setDocId(noDoc);
+                    newItem.setScore(keySetOfArrSim.get(i));
+                    
+                    TotalListRanking.add(newItem);
                 }
             }
             
@@ -178,7 +186,7 @@ public class SearchTFIDF {
         return (weight * weight);
     }
     
-    public static ArrayList<Integer> getTFIDFRanking(String query) {
+    public static ArrayList<RankedItem> getTFIDFRanking(String query) {
         String[] arr = query.split(" ");
         String preprocessed = "";
         for (String string : arr) {
@@ -190,28 +198,28 @@ public class SearchTFIDF {
         SearchTFIDF.getRanking(preprocessed, "Title");
         SearchTFIDF.getRanking(preprocessed, "Date");
         //System.out.println("\n\n\n");
-        for (Integer rank : TotalListRanking) {
-            //System.out.println(rank);
+        for (RankedItem rank : TotalListRanking) {
+            System.out.println(rank.getDocId());
         }
         
         return TotalListRanking;
     }
     
-    public static void main(String[] args) {
-        String query="Analyst appeared";
-        String[]arr=query.split(" ");
-        String preprocessed="";
-        for (String string : arr) {
-            preprocessed += preprocessing.PreProcess.singleWordPreprocess(string)+" ";
-        }
-        preprocessed = preprocessed.substring(0,preprocessed.length()-1);
-
-        SearchTFIDF.getRanking(preprocessed, "Body");
-        SearchTFIDF.getRanking(preprocessed, "Title");
-        SearchTFIDF.getRanking(preprocessed, "Date");
-        //System.out.println("\n\n\n");
-        for (Integer rank : TotalListRanking) {
-            //System.out.println(rank);
-        }
-    }
+//    public static void main(String[] args) {
+//        String query="Analyst appeared";
+//        String[]arr=query.split(" ");
+//        String preprocessed="";
+//        for (String string : arr) {
+//            preprocessed += preprocessing.PreProcess.singleWordPreprocess(string)+" ";
+//        }
+//        preprocessed = preprocessed.substring(0,preprocessed.length()-1);
+//
+//        SearchTFIDF.getRanking(preprocessed, "Body");
+//        SearchTFIDF.getRanking(preprocessed, "Title");
+//        SearchTFIDF.getRanking(preprocessed, "Date");
+//        //System.out.println("\n\n\n");
+////        for (Integer rank : TotalListRanking) {
+////            //System.out.println(rank);
+////        }
+//    }
 }
