@@ -206,7 +206,7 @@ public class SearchResultPanel extends javax.swing.JPanel {
         searchModelLabel.setText("Model");
 
         modelButtonGroup.add(probabilisticModelButton);
-        probabilisticModelButton.setText("Probabilistic");
+        probabilisticModelButton.setText("TF-IDF");
 
         modelButtonGroup.add(languageModelButton);
         languageModelButton.setText("Language Model");
