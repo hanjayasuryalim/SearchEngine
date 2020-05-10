@@ -4,6 +4,7 @@ import Search.Search;
 import Utility.ReadCSV;
 import Utility.ReadFile;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import preprocessing.PreProcess;
 
@@ -17,7 +18,7 @@ public class LM{
     private HashMap<String, Integer> termTotalFrequency;
     private double lambda = 0.5;
     private ArrayList<Integer> rankedDocNo;
-    
+    private String [] cleanTokens;
     
     LM(String query){
         this.query = query;
@@ -111,15 +112,19 @@ public class LM{
             termFrequency.put(words[i], wordFreq);
             termTotalFrequency.put(words[i], total);
         }
-        
-        calculateProbability(words);
-        
+        this.cleanTokens = words;
     }
 
     //P(q|d) = 
-    void calculateProbability(String [] tokens){
+    public ArrayList<RankedItem> calculateProbability(){
+        String [] tokens = this.cleanTokens;
+        ArrayList<RankedItem> rankedList = new ArrayList<>();
         ArrayList<Double> probs = new ArrayList<>();
         for (int i = 0; i < listDocsId.size(); i++) {
+            
+            RankedItem tempRankedItem = new RankedItem();
+            tempRankedItem.docId = listDocsId.get(i);
+            
             double probability = 1;
             for (int j = 0; j < tokens.length; j++) {
                 String token = tokens[j];
@@ -131,12 +136,23 @@ public class LM{
                 //System.out.println("((" + fWordInDoc + "/" + nWordInDoc + ")*" + lambda + ") + ((" + fWordTotal + "/" + nWordTotal + ")*(1.0-" + lambda + "))");
                 probability = probability * temp;
             }
+            
+            tempRankedItem.score = probability;
+            rankedList.add(tempRankedItem);
+            
             probs.add(probability);
             System.out.println(String.valueOf(probability));
         }
         
-        System.out.println("RANKING : ");
+        Collections.sort(rankedList);        
         
+        System.out.println("RANKING : ");
+        System.out.println("Total Item = " + String.valueOf(rankedList.size()));
+        for (int i = 0; i < rankedList.size(); i++) {
+            String a = String.valueOf(rankedList.get(i).score) + " => " + String.valueOf(rankedList.get(i).docId);
+            System.out.println(a);
+        }
+        /*
         rankedDocNo = new ArrayList<>();
         System.out.println("");
         for (int i = 0; i < listDocsId.size(); i++) {
@@ -152,11 +168,14 @@ public class LM{
             rankedDocNo.add(listDocsId.get(index));
             probs.set(index , 0.0);
         }
+        */
+        return rankedList;
     }
     
     
     
     public static void main(String[] args) {
-        LM langModel = new LM("Chairman closed the last");
+        LM langModel = new LM("1991");
+        langModel.calculateProbability();
     }
 }
