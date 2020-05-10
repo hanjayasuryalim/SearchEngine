@@ -24,6 +24,8 @@ public class SearchTFIDF {
     private static HashMap<String, ArrayList<NoDocValue>> dictWeight;
     private static HashMap<String, Double> dictIDF;
     
+    public static long startTime, endTime, timeElapsed;
+    
     //HashMap ini akan menyimpan data no document dan ArrayList 
     /*ArrayList ini akan menyimpan: 
         pada index ke-0: jumlah dari weight term i pada dokumen j dikalikan weight query term i (w i,j * w i,q)
@@ -187,6 +189,7 @@ public class SearchTFIDF {
     }
     
     public static ArrayList<RankedItem> getTFIDFRanking(String query) {
+        startTime = System.nanoTime();
         String[] arr = query.split(" ");
         String preprocessed = "";
         for (String string : arr) {
@@ -198,11 +201,18 @@ public class SearchTFIDF {
         SearchTFIDF.getRanking(preprocessed, "Title");
         SearchTFIDF.getRanking(preprocessed, "Date");
         //System.out.println("\n\n\n");
+        /*
         for (RankedItem rank : TotalListRanking) {
             System.out.println(rank.getDocId());
         }
-        
+        */
+        endTime = System.nanoTime();
         return TotalListRanking;
+    }
+    
+    public static long getTimeElapsed(){
+        timeElapsed = endTime-startTime;
+        return timeElapsed;
     }
     
 //    public static void main(String[] args) {
