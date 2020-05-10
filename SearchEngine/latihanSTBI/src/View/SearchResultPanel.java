@@ -14,6 +14,7 @@ import java.text.NumberFormat;
 import java.util.ArrayList;
 import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
+import vektorruang.SearchTFIDF;
 
 /**
  *
@@ -49,9 +50,8 @@ public class SearchResultPanel extends javax.swing.JPanel {
         switch(model){
             case 0 : {
                 modelButtonGroup.setSelected(probabilisticModelButton.getModel(), true);
-                Search s = new Search();
-                ArrayList<String> searchResult = s.search(searchQuery,mode);
-                ArrayList<String> resultList = new ArrayList<String>();
+                ArrayList<RankedItem> searchResult = SearchTFIDF.getTFIDFRanking(searchQuery);
+                ArrayList<RankedItem> resultList = new ArrayList<RankedItem>();
                 if(searchResult.size() > resultAmount) {
                     for(int i = 0; i < resultAmount; i++){
                         resultList.add(searchResult.get(i));
@@ -62,14 +62,14 @@ public class SearchResultPanel extends javax.swing.JPanel {
                 int resultCount = resultList.size();
                 Container resultContainer = new Container();
                 resultContainer.setLayout(new GridLayout(0,1));
-                for(String docNumber : resultList) {
+                for(RankedItem document : resultList) {
                     RankedItem tempItem = new RankedItem();
-                    tempItem.setDocId(Integer.parseInt(docNumber));
+                    tempItem.setDocId(document.docId);
                     tempItem.setScore(0);
                     ResultLinePanel searchResultPanel = new ResultLinePanel(tempItem,searchQuery,mode,model,resultAmount);
                     resultContainer.add(searchResultPanel);
                 }
-                long timeElapsed = s.getTimeElapsed();
+                long timeElapsed = SearchTFIDF.getTimeElapsed();
                 NumberFormat f = new DecimalFormat("#0.00");
                 responseLabel.setText("Showing " + resultCount + " results (" + f.format(timeElapsed/(double)1000000000) + " seconds)");
                 javax.swing.SwingUtilities.invokeLater(new Runnable() {

@@ -235,7 +235,7 @@
               <ComponentRef name="modelButtonGroup"/>
             </Property>
             <Property name="selected" type="boolean" value="true"/>
-            <Property name="text" type="java.lang.String" value="Probabilistic"/>
+            <Property name="text" type="java.lang.String" value="TF-IDF"/>
           </Properties>
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_AddingCodePre" type="java.lang.String" value="probabilisticModelButton.setActionCommand(&quot;0&quot;);"/>
