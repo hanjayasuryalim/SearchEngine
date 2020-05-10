@@ -29,7 +29,7 @@ public class ResultLinePanel extends javax.swing.JPanel {
         this.resultAmount = resultAmount;
         initComponents();
         XMLDoc doc = new XMLDoc(docNumber);
-        titleLabel.setText(doc.getTitle());
+        titleLabel.setText("["+docNumber+"] "+doc.getTitle());
         dateLabel.setText(doc.getDate());
         try{
             String bodyPreview = doc.getBody();
