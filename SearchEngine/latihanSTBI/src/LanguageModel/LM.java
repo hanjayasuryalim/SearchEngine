@@ -156,7 +156,7 @@ public class LM{
         }
         
         rankedDocNo = new ArrayList<>();
-        System.out.println("");
+        //System.out.println("");
         for (int i = 0; i < listDocsId.size(); i++) {
             double p = 0.0;
             int index = 0;
@@ -166,7 +166,7 @@ public class LM{
                     index = j;
                 }
             }
-            System.out.print(listDocsId.get(index) + ", ");
+            //System.out.print(listDocsId.get(index) + ", ");
             //rankedDocNo.add(listDocsId.get(index));
             probs.set(index , 0.0);
         }
