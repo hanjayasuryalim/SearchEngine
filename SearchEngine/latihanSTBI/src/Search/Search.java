@@ -130,16 +130,16 @@ public class Search {
         if (word.length()>0){
             //levensthein and Soundex
             Soundex.initiate();
-            int threshold = 1;
+            int threshold = 0;
             ArrayList<String> titleValidWordList = new ArrayList<>();
             for (String string : titleDict.keySet()) {
                 if (Levensthein.getLevenshteinDistance(word, string)<=threshold){
                     titleValidWordList.add(string);
                 }
 
-                if(Soundex.execute(word, string)){
-                    titleValidWordList.add(string);
-                }
+//                if(Soundex.execute(word, string)){
+//                    titleValidWordList.add(string);
+//                }
             }
 
             //test leven title
@@ -165,9 +165,9 @@ public class Search {
                   bodyValidWordList.add(string);
               }
 
-              if(Soundex.execute(word, string)){
-                  bodyValidWordList.add(string);
-              }
+//              if(Soundex.execute(word, string)){
+//                  bodyValidWordList.add(string);
+//              }
             }
 
             //test leven title
