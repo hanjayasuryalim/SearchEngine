@@ -81,11 +81,10 @@ public class LM{
             query = query.replace("  "," ");
         }
         words = query.split(" ");
-        
+                
         termTotalFrequency = new HashMap<>();
         termFrequency = new HashMap<>();
         for (int i = 0; i < words.length; i++) {
-            words[i] = PreProcess.singleWordPreprocess(words[i]);
             ArrayList<Integer> fullFreqBody = hmBody.get(words[i]);
             ArrayList<Integer> fullFreqDate = hmDate.get(words[i]);
             ArrayList<Integer> fullFreqTitle = hmTitle.get(words[i]);
@@ -155,7 +154,7 @@ public class LM{
             String a = String.valueOf(rankedList.get(i).score) + " => " + String.valueOf(rankedList.get(i).docId);
             //System.out.println(a);
         }
-        /*
+        
         rankedDocNo = new ArrayList<>();
         System.out.println("");
         for (int i = 0; i < listDocsId.size(); i++) {
@@ -168,10 +167,10 @@ public class LM{
                 }
             }
             System.out.print(listDocsId.get(index) + ", ");
-            rankedDocNo.add(listDocsId.get(index));
+            //rankedDocNo.add(listDocsId.get(index));
             probs.set(index , 0.0);
         }
-        */
+        
         // END
         endTime = System.nanoTime();
         return rankedList;
