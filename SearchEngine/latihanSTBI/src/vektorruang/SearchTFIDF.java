@@ -35,7 +35,7 @@ public class SearchTFIDF {
     */
     private static HashMap<Integer, ArrayList<Double>> arrDocWeight = new HashMap<>();
     private static ArrayList<Integer> relatedNoDoc = new ArrayList<>();
-    
+   
     private static HashMap<Double, ArrayList<Integer>> arrSim = new HashMap<>();
     private static ArrayList<Double> keySetOfArrSim = new ArrayList<>();
     
@@ -189,6 +189,13 @@ public class SearchTFIDF {
     }
     
     public static ArrayList<RankedItem> getTFIDFRanking(String query) {
+        TotalListRanking.clear();
+        noDocumentInRanking.clear();
+        arrDocWeight.clear();
+        relatedNoDoc.clear();
+        arrSim.clear();
+        keySetOfArrSim.clear();
+        
         startTime = System.nanoTime();
         String[] arr = query.split(" ");
         String preprocessed = "";
