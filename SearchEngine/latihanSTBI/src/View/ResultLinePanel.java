@@ -15,16 +15,15 @@ import javax.swing.SwingUtilities;
 public class ResultLinePanel extends javax.swing.JPanel {
 
     RankedItem targetDoc;
-    int docNumber, mode, model, resultAmount;
+    int docNumber, model, resultAmount;
     String lastQuery;
     /**
      * Creates new form ResultLinePanel
      */
-    public ResultLinePanel(RankedItem targetDoc, String lastQuery, int mode, int model, int resultAmount) {
+    public ResultLinePanel(RankedItem targetDoc, String lastQuery, int model, int resultAmount) {
         this.targetDoc = targetDoc;
         this.docNumber = targetDoc.docId;
         this.lastQuery = lastQuery;
-        this.mode = mode;
         this.model = model;
         this.resultAmount = resultAmount;
         initComponents();
@@ -105,7 +104,7 @@ public class ResultLinePanel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void bodyTextAreaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bodyTextAreaMouseClicked
-        DocumentPanel docPanel = new DocumentPanel(targetDoc,lastQuery,mode,model,resultAmount);
+        DocumentPanel docPanel = new DocumentPanel(targetDoc,lastQuery,model,resultAmount);
         JFrame parentFrame = (JFrame) SwingUtilities.getWindowAncestor(this);
         parentFrame.getContentPane().remove(this);
         parentFrame.setContentPane(docPanel);
