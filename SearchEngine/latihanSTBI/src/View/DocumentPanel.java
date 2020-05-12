@@ -16,18 +16,17 @@ import javax.swing.SwingUtilities;
  */
 public class DocumentPanel extends javax.swing.JPanel {
 
-    private int docNumber, mode, model, resultAmount;
+    private int docNumber, model, resultAmount;
     private double docScore;
     private String lastQuery;
     /**
      * Creates new form DocumentPanel
      */
-    public DocumentPanel(RankedItem targetDoc, String lastQuery, int mode, int model, int resultAmount) {
+    public DocumentPanel(RankedItem targetDoc, String lastQuery, int model, int resultAmount) {
         NumberFormat f = new DecimalFormat("#0.000000");
         this.docNumber = targetDoc.docId;
         this.docScore = targetDoc.score;
         this.lastQuery = lastQuery;
-        this.mode = mode;
         this.model = model;
         this.resultAmount = resultAmount;
         initComponents();
@@ -119,7 +118,7 @@ public class DocumentPanel extends javax.swing.JPanel {
 
     private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButtonActionPerformed
         JFrame parentFrame = (JFrame) SwingUtilities.getWindowAncestor(this);
-        SearchResultPanel resultPanel = new SearchResultPanel(lastQuery,mode,model,resultAmount);
+        SearchResultPanel resultPanel = new SearchResultPanel(lastQuery,model,resultAmount);
         parentFrame.getContentPane().remove(this);
         parentFrame.setContentPane(resultPanel);
         parentFrame.repaint();
