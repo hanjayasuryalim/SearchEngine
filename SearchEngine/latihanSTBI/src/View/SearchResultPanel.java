@@ -45,10 +45,7 @@ public class SearchResultPanel extends javax.swing.JPanel {
                 Container resultContainer = new Container();
                 resultContainer.setLayout(new GridLayout(0,1));
                 for(RankedItem document : resultList) {
-                    RankedItem tempItem = new RankedItem();
-                    tempItem.setDocId(document.docId);
-                    tempItem.setScore(0);
-                    ResultLinePanel searchResultPanel = new ResultLinePanel(tempItem,searchQuery,model,resultAmount);
+                    ResultLinePanel searchResultPanel = new ResultLinePanel(document,searchQuery,model,resultAmount);
                     resultContainer.add(searchResultPanel);
                 }
                 long timeElapsed = SearchTFIDF.getTimeElapsed();
