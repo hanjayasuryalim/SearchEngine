@@ -65,7 +65,7 @@ public class LM{
                 }
             }
             ArrayList<Integer> bodyArray = hmBody.get(words[i]);
-            if (titleArray != null){
+            if (bodyArray != null){
                 for (int j = 0; j < bodyArray.size(); j++) {
                     if (bodyArray.get(j) > 0){    
                         listDocsId.add(j+1);
@@ -74,8 +74,10 @@ public class LM{
             }
         }
         
+        Collections.sort(listDocsId);
+        
         for(int i = 1; i < listDocsId.size(); i++) {
-            while (listDocsId.get(i).equals(listDocsId.get(i-1))){
+            while (i < listDocsId.size() && listDocsId.get(i).equals(listDocsId.get(i-1))){
                 listDocsId.remove(i);
             }
             
@@ -219,7 +221,7 @@ public class LM{
     }
     
     public static void main(String[] args) {
-        LM langModel = new LM("1991");
+        LM langModel = new LM("Chairman closed the last");
         langModel.calculateProbability();
     }
 }
