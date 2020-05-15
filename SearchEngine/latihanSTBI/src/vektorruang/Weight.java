@@ -17,8 +17,10 @@ import java.util.HashMap;
  * @author user
  */
 public class Weight {
-
+    
+    public static long startTime, endTime, timeElapsed;
     public static void main(String[] args) {
+        startTime = System.nanoTime();
         String pathBodyIDF = "XML/IDFBody.csv";
         String pathTitleIDF = "XML/IDFTitle.csv";
         String pathDateIDF = "XML/IDFDate.csv";
@@ -56,6 +58,9 @@ public class Weight {
         saveWeight(hmDateWeight,"XML/WeightDate.csv");
         saveWeight(hmBodyWeight,"XML/WeightBody.csv");
         saveWeight(hmTitleWeight,"XML/WeightTitle.csv");
+        endTime = System.nanoTime();
+        timeElapsed = endTime-startTime;
+        System.out.println(timeElapsed);
         //checking
 //        printCheckHashMap(hmDateWeight,"Date");
 //        printCheckHashMap(hmTitleWeight,"Title");
