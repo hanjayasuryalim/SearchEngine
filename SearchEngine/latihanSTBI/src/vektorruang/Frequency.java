@@ -1,5 +1,6 @@
 package vektorruang;
 
+
 import Model.NoDocValue;
 import Utility.WriteFile;
 import java.io.File;
@@ -19,7 +20,7 @@ public class Frequency {
     private ArrayList<String> termDate;
     private ArrayList<String> termTitle;
     private ArrayList<String> termBody;
-
+    public static long startTime, endTime, timeElapsed;
     private HashMap<String, ArrayList<NoDocFrequency>> dictDate;
     private HashMap<String, ArrayList<NoDocFrequency>> dictTitle;
     private HashMap<String, ArrayList<NoDocFrequency>> dictBody;
@@ -36,6 +37,7 @@ public class Frequency {
     }
 
     public void countTotalWord(){
+      
         ArrayList<Integer> dateCount = new ArrayList<>();
         ArrayList<Integer> bodyCount = new ArrayList<>();
         ArrayList<Integer> titleCount = new ArrayList<>();
@@ -339,9 +341,14 @@ public class Frequency {
     }
 
     public static void main(String[] args) {
+        startTime = System.nanoTime();
         Frequency f = new Frequency();
         f.countTotalWord();
         f.countTermFrequency();
+        endTime = System.nanoTime();
+        timeElapsed = endTime-startTime;
+        System.out.println(timeElapsed);
+        
         
     }
 
