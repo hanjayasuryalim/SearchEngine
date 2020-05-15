@@ -18,8 +18,10 @@ import static Utility.WriteIntoCSV.saveIDF;
  * @author user
  */
 public class TFIDF {
-
+    public static long startTime, endTime, timeElapsed;
+    
     public static void main(String[] args) {
+        startTime = System.nanoTime();
         String pathBody = "XML/FrequencyBody.csv";
         String pathTitle = "XML/FrequencyTitle.csv";
         String pathDate = "XML/FrequencyDate.csv";
@@ -48,18 +50,24 @@ public class TFIDF {
 //        save(hmDateTF,"XML/TFDate.csv");
 //        save(hmBodyTF,"XML/TFBody.csv");
 //        save(hmTitleTF,"XML/TFTitle.csv");
+//         endTime = System.nanoTime();
+//         timeElapsed = endTime-startTime;
+//         System.out.println(timeElapsed);
         //==============================================================- CREATE IDF HASH MAP
         HashMap<String,Double> hmDateIDF = new HashMap<>();
         HashMap<String,Double> hmTitleIDF = new HashMap<>();
         HashMap<String,Double> hmBodyIDF = new HashMap<>();
 //        
-        hmDateIDF = getIDF(hmDate);
-        hmTitleIDF = getIDF(hmTitle);
-        hmBodyIDF = getIDF(hmBody);
+//        hmDateIDF = getIDF(hmDate);
+//        hmTitleIDF = getIDF(hmTitle);
+//        hmBodyIDF = getIDF(hmBody);
         //SAVING INTO CSV
           saveIDF(hmDateIDF,"XML/IDFDate.csv");
           saveIDF(hmBodyIDF,"XML/IDFBody.csv");
           saveIDF(hmTitleIDF,"XML/IDFTitle.csv");
+         endTime = System.nanoTime();
+         timeElapsed = endTime-startTime;
+         System.out.println(timeElapsed);
 //                
     }
 
