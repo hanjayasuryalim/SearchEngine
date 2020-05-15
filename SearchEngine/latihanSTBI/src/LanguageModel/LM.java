@@ -11,7 +11,7 @@ import preprocessing.PreProcess;
 public class LM{
     private String query;
     private ArrayList<Integer> listDocsId;
-    private String path = "XML/";
+    private static String path = "XML/";
     private int totalWord;
     private ArrayList<Integer> totalWordPerDoc;
     private HashMap<String, ArrayList<Integer>> termFrequency;
@@ -20,6 +20,11 @@ public class LM{
     private ArrayList<Integer> rankedDocNo;
     private String [] cleanTokens;
     public static long startTime, endTime, timeElapsed;
+    private static HashMap<String,ArrayList<Integer>> hmDate = ReadCSV.getIntegerCSV(path + "FrequencyDate.csv");
+    private static HashMap<String,ArrayList<Integer>> hmTitle = ReadCSV.getIntegerCSV(path + "FrequencyBody.csv");
+    private static HashMap<String,ArrayList<Integer>> hmBody = ReadCSV.getIntegerCSV(path + "FrequencyTitle.csv");
+        
+    
     
     public LM(String query){
         // START
@@ -28,10 +33,57 @@ public class LM{
         
         
         //Search query dengan mode OR
-        ArrayList<String> listDocs = Search.search(query, 0);
-        //System.out.println("Founded = " + listDocs.size());
+        
+        
         listDocsId = new ArrayList<>();
-        listDocs.forEach(docName -> listDocsId.add(Integer.valueOf(docName)));
+        
+        
+        String [] words = query.split(" ");
+        
+        for (int i = 0; i < words.length; i++) {
+            words[i] = PreProcess.singleWordPreprocess(words[i]);
+            
+        }
+        
+        for (int i = 0; i < words.length; i++) {
+            //System.out.println(words[i]);
+            ArrayList<Integer> dateArray = hmDate.get(words[i]);
+            if (dateArray != null){
+                for (int j = 0; j < dateArray.size(); j++) {
+                    if (dateArray.get(j) > 0){    
+                        listDocsId.add(j+1);
+                    }
+                }
+            }
+            
+            ArrayList<Integer> titleArray = hmTitle.get(words[i]);
+            if (titleArray != null){
+                for (int j = 0; j < titleArray.size(); j++) {
+                    if (titleArray.get(j) > 0){    
+                        listDocsId.add(j+1);
+                    }
+                }
+            }
+            ArrayList<Integer> bodyArray = hmBody.get(words[i]);
+            if (bodyArray != null){
+                for (int j = 0; j < bodyArray.size(); j++) {
+                    if (bodyArray.get(j) > 0){    
+                        listDocsId.add(j+1);
+                    }
+                }
+            }
+        }
+        
+        Collections.sort(listDocsId);
+        
+        for(int i = 1; i < listDocsId.size(); i++) {
+            while (i < listDocsId.size() && listDocsId.get(i).equals(listDocsId.get(i-1))){
+                listDocsId.remove(i);
+            }
+            
+        }
+
+        //System.out.println("Founded = " + listDocs.size());
         
         // Membuka file yang isinya jumlah word per dokumen yang dipecah jadi 3 (untuk pengembangan)
         String [] bodyCount = ReadFile.inputSingleLineFile(path + "BodyCount.csv").split(",");
@@ -48,7 +100,7 @@ public class LM{
         // Menyimpan nilai total word dan jumlah word per dokumen yang ditemukan
         totalWordPerDoc = new ArrayList<>();
         totalWord = 0;
-        for (int i = 0; i < listDocs.size(); i++) {
+        for (int i = 0; i < listDocsId.size(); i++) {
             int index = listDocsId.get(i)-1;
             int temp = Integer.valueOf(bodyCount[index]);
             temp += Integer.valueOf(dateCount[index]);
@@ -59,22 +111,9 @@ public class LM{
         }
         //System.out.println("");
         
-        HashMap<String,ArrayList<Integer>> hmDate = new HashMap<>();
-        HashMap<String,ArrayList<Integer>> hmTitle = new HashMap<>();
-        HashMap<String,ArrayList<Integer>> hmBody = new HashMap<>();
-        
-        hmDate = ReadCSV.getIntegerCSV(path + "FrequencyDate.csv");
-        hmBody = ReadCSV.getIntegerCSV(path + "FrequencyBody.csv");
-        hmTitle = ReadCSV.getIntegerCSV(path + "FrequencyTitle.csv");
         
         
-        
-        String [] words = query.split(" ");
-        
-        for (int i = 0; i < words.length; i++) {
-            words[i] = PreProcess.singleWordPreprocess(words[i]);
-            
-        }
+       
             
         query = String.join(" ", words);
         while (query.contains("  ")){
@@ -94,7 +133,7 @@ public class LM{
             ArrayList<Integer> wordFreq = new ArrayList<>();
             
             int total = 0;
-            for (int j = 0; j < listDocs.size(); j++) {
+            for (int j = 0; j < listDocsId.size(); j++) {
                 int index = listDocsId.get(j)-1;
                 int temp = 0;
                 if (fullFreqBody != null){
@@ -182,7 +221,7 @@ public class LM{
     }
     
     public static void main(String[] args) {
-        LM langModel = new LM("1991");
+        LM langModel = new LM("Chairman closed the last");
         langModel.calculateProbability();
     }
 }
